@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CreationStatusCaracter
 {
-    internal class CalculateDamage
+    public class CalculateDamage
     {
         private static Random rnd = new Random();
 

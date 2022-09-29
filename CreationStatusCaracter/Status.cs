@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CreationStatusCaracter
 {
-    internal class Status
+    public class Status
     {
         private string _name;
         private int _age;

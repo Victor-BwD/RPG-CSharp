@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CreationStatusCaracter {
-    internal class Creation {
+    public class Creation {
         private List<int> numbersToPut = new List<int>() { 15, 12, 10, 8 };
-        private Status status = new Status();
+        public Status status = new Status();
 
         public void CreationCaracter() {
 
