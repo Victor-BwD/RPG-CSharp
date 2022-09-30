@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CreationStatusCaracter
 {
-    public class CalculateDamage
+    public class CalculateWeaponDamage
     {
         private static Random rnd = new Random();
 
@@ -23,6 +23,14 @@ namespace CreationStatusCaracter
             int rng = rnd.Next(5, 11);
             int weaponDamage = 5;
             int damage = weaponDamage + rng * dex;
+            return damage;
+        }
+
+        public static int DamageIntWeapon(int intelligence)
+        {
+            int rng = rnd.Next(5, 11);
+            int weaponDamage = 1;
+            int damage = weaponDamage + rng * intelligence;
             return damage;
         }
     }
