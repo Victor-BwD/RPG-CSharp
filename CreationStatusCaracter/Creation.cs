@@ -9,7 +9,8 @@ namespace CreationStatusCaracter {
         private List<int> numbersToPut = new List<int>() { 15, 12, 10, 8 };
         public Status status = new Status();
 
-        public void CreationCaracter() {
+        public void CreationCaracter()
+        {
 
             Console.WriteLine("Let's make create your caracter in a RPG");
             Console.WriteLine("Your name: ");
@@ -17,26 +18,38 @@ namespace CreationStatusCaracter {
             Console.WriteLine("Your class: ");
             status.Class = Console.ReadLine();
             Console.WriteLine("Your age: ");
-           
+
             Console.WriteLine("Lets choose your atributtes...");
             Console.Write("Choose the points of atribbuttes between: ");
             Console.WriteLine(string.Join(", ", numbersToPut));
 
-            do {
+            DistributeStatus();
+
+            RandomHP();
+
+            Console.WriteLine("Your caracter is created!");
+        }
+
+        private void DistributeStatus()
+        {
+            do
+            {
                 Console.Write("Strong: ");
                 status.Strong = int.Parse(Console.ReadLine());
             } while (!numbersToPut.Contains(status.Strong));
 
             numbersToPut.Remove(status.Strong);
 
-            do {
+            do
+            {
                 Console.Write("Dexterity: ");
                 status.Dex = int.Parse(Console.ReadLine());
             } while (!numbersToPut.Contains(status.Dex));
 
             numbersToPut.Remove(status.Dex);
 
-            do {
+            do
+            {
                 Console.Write("Intelligence: ");
                 status.Intelligence = int.Parse(Console.ReadLine());
             } while (!numbersToPut.Contains(status.Intelligence));
@@ -46,10 +59,6 @@ namespace CreationStatusCaracter {
                 Console.Write("Charisma: ");
                 status.Charisma = int.Parse(Console.ReadLine());
             } while (!numbersToPut.Contains(status.Charisma));
-
-            RandomHP();
-
-            Console.WriteLine("Your caracter is created!");
         }
 
         private void RandomHP() {
