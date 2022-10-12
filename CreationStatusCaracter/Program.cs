@@ -1,5 +1,5 @@
 ﻿using CreationStatusCaracter;
 
-Creation creation = new CreationStatusCaracter.Creation();
+Creation creation = new Creation();
 
 creation.CreationCaracter();
