@@ -1,3 +1,5 @@
-﻿CreationStatusCaracter.Creation creation = new CreationStatusCaracter.Creation();
+﻿using CreationStatusCaracter;
+
+Creation creation = new CreationStatusCaracter.Creation();
 
 creation.CreationCaracter();
