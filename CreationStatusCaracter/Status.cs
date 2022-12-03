@@ -25,7 +25,11 @@ namespace CreationStatusCaracter
                 if(value != null && value.Length > 1)
                 {
                     _name = value;
-                } 
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("value", ("Name must have more characters."));
+                }
             }
         }
 
@@ -34,9 +38,15 @@ namespace CreationStatusCaracter
             get { return _age; }
             set
             {
-                if (value > 16)
+                if (value >= 16)
                 {
                     _age = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("value",
+                        string.Format("Age must be higher than or equal to {0}.", 16)
+                    );
                 }
             }
         }
@@ -49,6 +59,10 @@ namespace CreationStatusCaracter
                 if (value != null && value.Length > 1)
                 {
                     _class = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("value", ("Class must have more characters."));
                 }
             }
         }
