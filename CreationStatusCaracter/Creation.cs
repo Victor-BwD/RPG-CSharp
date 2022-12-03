@@ -11,14 +11,7 @@ namespace CreationStatusCaracter {
 
         public void CreationCaracter()
         {
-
-            Console.WriteLine("Let's make create your caracter in a RPG");
-            Console.WriteLine("Your name: ");
-            status.Name = Console.ReadLine();
-            Console.WriteLine("Your class: ");
-            status.Class = Console.ReadLine();
-            Console.WriteLine("Your age: ");
-            status.Age = int.Parse(Console.ReadLine());
+            InitFunction();
 
             Console.WriteLine("Lets choose your atributtes...");
             Console.Write("Choose the points of atribbuttes between: ");
@@ -29,6 +22,17 @@ namespace CreationStatusCaracter {
             RandomHP();
 
             Console.WriteLine("Your caracter is created!");
+        }
+
+        private void InitFunction()
+        {
+            Console.WriteLine("Let's make create your caracter in a RPG");
+            Console.WriteLine("Your name: ");
+            status.Name = Console.ReadLine();
+            Console.WriteLine("Your class: ");
+            status.Class = Console.ReadLine();
+            Console.WriteLine("Your age: ");
+            status.Age = int.Parse(Console.ReadLine());
         }
 
         private void DistributeStatus()
