@@ -18,6 +18,7 @@ namespace CreationStatusCaracter {
             Console.WriteLine("Your class: ");
             status.Class = Console.ReadLine();
             Console.WriteLine("Your age: ");
+            status.Age = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Lets choose your atributtes...");
             Console.Write("Choose the points of atribbuttes between: ");
