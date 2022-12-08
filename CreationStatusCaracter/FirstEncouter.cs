@@ -5,7 +5,7 @@ public class FirstEncouter
     public int lies;
     public void FirstContact(string name, int age)
     {
-        Console.WriteLine("A mage finds you in a tavern and asks your name and age...");
+        Console.WriteLine("A old man finds you in a tavern and asks your name and age...");
         var tellName = Console.ReadLine();
         var tellAge = int.Parse(Console.ReadLine());
         if (tellName != name || tellAge != age)

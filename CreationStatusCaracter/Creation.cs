@@ -40,11 +40,11 @@ namespace CreationStatusCaracter {
         {
             do
             {
-                Console.Write("Strong: ");
-                status.Strong = int.Parse(Console.ReadLine());
-            } while (!numbersToPut.Contains(status.Strong));
+                Console.Write("Strength: ");
+                status.Strength = int.Parse(Console.ReadLine());
+            } while (!numbersToPut.Contains(status.Strength));
 
-            numbersToPut.Remove(status.Strong);
+            numbersToPut.Remove(status.Strength);
 
             do
             {

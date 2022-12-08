@@ -12,7 +12,7 @@ namespace CreationStatusCaracter
         private int _age;
         private string _class;
 
-        public int Strong;
+        public int Strength;
         public int Dex;
         public int Intelligence;
         public int Constitution;
