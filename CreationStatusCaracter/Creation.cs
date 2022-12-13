@@ -37,6 +37,8 @@ namespace CreationStatusCaracter {
                 status.Class = Console.ReadLine();
             } while (!classesList.Contains(status.Class));
             
+            classesList.Remove(status.Class);
+            
             Console.WriteLine("Your age: ");
             Console.WriteLine("Your age must be more than 16 years old.");
             status.Age = int.Parse(Console.ReadLine());
