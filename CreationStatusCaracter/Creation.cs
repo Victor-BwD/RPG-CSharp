@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CreationStatusCaracter {
     public class Creation {
-        private List<int> numbersToPut = new List<int>() { 15, 12, 10, 8 };
+        private List<int> statsNumbers = new List<int>() { 15, 12, 10, 8 };
+        private List<string> classesList = new List<string>() { "Warrior", "Mage", "Rogue" };
         public Status status = new Status();
 
         public void CreationCaracter()
@@ -15,7 +16,7 @@ namespace CreationStatusCaracter {
 
             Console.WriteLine("Lets choose your atributtes...");
             Console.Write("Choose the points of atribbuttes between: ");
-            Console.WriteLine(string.Join(", ", numbersToPut));
+            Console.WriteLine(string.Join(", ", statsNumbers));
 
             DistributeStatus();
 
@@ -26,11 +27,16 @@ namespace CreationStatusCaracter {
 
         private void InitFunction()
         {
-            Console.WriteLine("Let's make create your caracter in a RPG");
+            Console.WriteLine("----------- Welcome to my RPG made in C# -----------");
+            Console.WriteLine("Let's make create your character in a RPG");
             Console.WriteLine("Your name: ");
             status.Name = Console.ReadLine();
-            Console.WriteLine("Your class: ");
-            status.Class = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("Your class: ");
+                status.Class = Console.ReadLine();
+            } while (!classesList.Contains(status.Class));
+            
             Console.WriteLine("Your age: ");
             Console.WriteLine("Your age must be more than 16 years old.");
             status.Age = int.Parse(Console.ReadLine());
@@ -42,29 +48,29 @@ namespace CreationStatusCaracter {
             {
                 Console.Write("Strength: ");
                 status.Strength = int.Parse(Console.ReadLine());
-            } while (!numbersToPut.Contains(status.Strength));
+            } while (!statsNumbers.Contains(status.Strength));
 
-            numbersToPut.Remove(status.Strength);
+            statsNumbers.Remove(status.Strength);
 
             do
             {
                 Console.Write("Dexterity: ");
                 status.Dex = int.Parse(Console.ReadLine());
-            } while (!numbersToPut.Contains(status.Dex));
+            } while (!statsNumbers.Contains(status.Dex));
 
-            numbersToPut.Remove(status.Dex);
+            statsNumbers.Remove(status.Dex);
 
             do
             {
                 Console.Write("Intelligence: ");
                 status.Intelligence = int.Parse(Console.ReadLine());
-            } while (!numbersToPut.Contains(status.Intelligence));
+            } while (!statsNumbers.Contains(status.Intelligence));
 
             do
             {
                 Console.Write("Charisma: ");
                 status.Charisma = int.Parse(Console.ReadLine());
-            } while (!numbersToPut.Contains(status.Charisma));
+            } while (!statsNumbers.Contains(status.Charisma));
         }
 
         private void RandomHP() {
