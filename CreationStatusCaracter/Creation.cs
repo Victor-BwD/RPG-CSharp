@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CreationStatusCaracter {
     public class Creation {
         private List<int> statsNumbers = new List<int>() { 15, 12, 10, 8 };
-        private List<string> classesList = new List<string>() { "Warrior", "Mage", "Rogue" };
+        private List<string> classesList = new List<string>() { "Warrior", "warrior", "mage", "rogue", "Mage", "Rogue" };
         public Status status = new Status();
 
         public void CreationCaracter()
@@ -86,8 +86,29 @@ namespace CreationStatusCaracter {
             }
 
             Random rnd = new Random();
-            status.Constitution = rnd.Next(8, 15);
+            
+            if (status.Class == "Warrior" || status.Class == "warrior")
+            {
+                status.Constitution = rnd.Next(8, 15);
+            }else if (status.Class == "Mage" || status.Class == "mage")
+            {
+                status.Constitution = rnd.Next(4, 8);
+            }
+            else
+            {
+                status.Constitution = rnd.Next(6, 11);
+            }
+            
             Console.WriteLine("Your constitution is: {0}", status.Constitution);
+            
+            ClassChoosed();
+        }
+
+        private void ClassChoosed()
+        {
+            Console.WriteLine($"You are a {status.Class}");
+            Console.WriteLine($"Your atributtes are {status.Strength} in strength, {status.Dex} in dexterity, {status.Intelligence} in intelligence," +
+                              $"{status.Charisma} in charisma and {status.Constitution} in constitution. So, you have {status.Constitution} in your health bar.");
         }
     }
 }
