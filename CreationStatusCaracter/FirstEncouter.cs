@@ -5,8 +5,8 @@ public class FirstEncouter
     
     public void FirstContact(string name, int age)
     {
-        Console.WriteLine("Lets start the history, remember that your actions impact.");
-        Console.WriteLine("A old man finds you in a tavern and asks your name and age...");
+        Console.WriteLine("You're in a tavern drinking and an old man approaches you with a paper...");
+        Console.WriteLine("The man appears to be a sage or something. He shows you a contract with a prize.");
         var tellName = Console.ReadLine();
         var tellAge = int.Parse(Console.ReadLine());
         
