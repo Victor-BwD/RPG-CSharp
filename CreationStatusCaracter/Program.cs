@@ -13,4 +13,4 @@ int dexterity = creation.status.Dex;
 int intelligence = creation.status.Intelligence;
 int charisma = creation.status.Charisma;
 
-encouter1.FirstContact(name, age);
+encouter1.FirstContact(name, className);
