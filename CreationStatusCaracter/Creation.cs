@@ -6,42 +6,40 @@ using System.Threading.Tasks;
 
 namespace CreationStatusCaracter {
     public class Creation {
-        private List<int> statsNumbers = new List<int>() { 15, 12, 10, 8 };
-        private List<string> classesList = new List<string>() { "Warrior", "warrior", "mage", "rogue", "Mage", "Rogue" };
-        public Status status = new Status();
+        private readonly List<int> _statsNumbers = new () { 15, 12, 10, 8 };
+        private readonly Status _status = new();
+        
 
-        public void CreationCaracter()
+        
+
+        public PlayerCharacter CreationCharacter()
         {
-            InitFunction();
+            InitFunction(out var name, out var job);
 
             Console.WriteLine("Lets choose your atributtes...");
             Console.Write("Choose the points of atribbuttes between: ");
-            Console.WriteLine(string.Join(", ", statsNumbers));
+            Console.WriteLine(string.Join(", ", _statsNumbers));
 
             DistributeStatus();
 
-            RandomHP();
+            ClassChoosed(job);
 
-            Console.WriteLine("Your caracter is created!");
+            Console.WriteLine("Your character is created!");
+            return new PlayerCharacter(name, job, _status);
         }
 
-        private void InitFunction()
+        private void InitFunction(out string name, out Job job)
         {
             Console.WriteLine("----------- Welcome to my RPG made in C# -----------");
             Console.WriteLine("Let's make create your character in a RPG");
             Console.WriteLine("Your name: ");
-            status.Name = Console.ReadLine();
+            name = Console.ReadLine();
+            
             do
             {
-                Console.WriteLine("Your class: ");
-                status.Class = Console.ReadLine();
-            } while (!classesList.Contains(status.Class));
-            
-            classesList.Remove(status.Class);
-            
-            Console.WriteLine("Your age: ");
-            Console.WriteLine("Your age must be more than 16 years old.");
-            status.Age = int.Parse(Console.ReadLine());
+                Console.WriteLine("Your job: ");
+                job = Job.Create(Console.ReadLine());
+            } while (ReferenceEquals(job, null));
         }
 
         private void DistributeStatus()
@@ -49,66 +47,69 @@ namespace CreationStatusCaracter {
             do
             {
                 Console.Write("Strength: ");
-                status.Strength = int.Parse(Console.ReadLine());
-            } while (!statsNumbers.Contains(status.Strength));
+                _status.Strength = int.Parse(Console.ReadLine());
+            } while (!_statsNumbers.Contains(_status.Strength));
 
-            statsNumbers.Remove(status.Strength);
+            _statsNumbers.Remove(_status.Strength);
 
             do
             {
                 Console.Write("Dexterity: ");
-                status.Dex = int.Parse(Console.ReadLine());
-            } while (!statsNumbers.Contains(status.Dex));
+                _status.Dex = int.Parse(Console.ReadLine());
+            } while (!_statsNumbers.Contains(_status.Dex));
 
-            statsNumbers.Remove(status.Dex);
+            _statsNumbers.Remove(_status.Dex);
 
             do
             {
                 Console.Write("Intelligence: ");
-                status.Intelligence = int.Parse(Console.ReadLine());
-            } while (!statsNumbers.Contains(status.Intelligence));
+                _status.Intelligence = int.Parse(Console.ReadLine());
+            } while (!_statsNumbers.Contains(_status.Intelligence));
 
             do
             {
                 Console.Write("Charisma: ");
-                status.Charisma = int.Parse(Console.ReadLine());
-            } while (!statsNumbers.Contains(status.Charisma));
+                _status.Charisma = int.Parse(Console.ReadLine());
+            } while (!_statsNumbers.Contains(_status.Charisma));
         }
 
-        private void RandomHP() {
-            Console.WriteLine("Now is time to roll your constitution... Press enter to roll the dice...");
-            var pressEnter = Console.ReadLine();
+        // private void RandomHP() {
+        //     Console.WriteLine("Now is time to roll your constitution... Press enter to roll the dice...");
+        //     var pressEnter = Console.ReadLine();
+        //
+        //     while (!string.IsNullOrEmpty(pressEnter))
+        //     {
+        //         Console.WriteLine("Now is time to roll your constitution... Press enter to roll the dice...");
+        //         pressEnter = Console.ReadLine();
+        //     }
+        //
+        //     Console.WriteLine();
+        //     
+        //
+        //     // Random rnd = new Random();
+        //     //
+        //     // if (_status.Class == "Warrior" || _status.Class == "warrior")
+        //     // {
+        //     //     _status.Constitution = rnd.Next(8, 15);
+        //     // }else if (_status.Class == "Mage" || _status.Class == "mage")
+        //     // {
+        //     //     _status.Constitution = rnd.Next(4, 8);
+        //     // }
+        //     // else
+        //     // {
+        //     //     _status.Constitution = rnd.Next(6, 11);
+        //     // }
+        //     
+        //     Console.WriteLine("Your constitution is: {0}", _status.Constitution);
+        //     
+        //     ClassChoosed();
+        // }
 
-            while (!string.IsNullOrEmpty(pressEnter))
-            {
-                Console.WriteLine("Now is time to roll your constitution... Press enter to roll the dice...");
-                pressEnter = Console.ReadLine();
-            }
-
-            Random rnd = new Random();
-            
-            if (status.Class == "Warrior" || status.Class == "warrior")
-            {
-                status.Constitution = rnd.Next(8, 15);
-            }else if (status.Class == "Mage" || status.Class == "mage")
-            {
-                status.Constitution = rnd.Next(4, 8);
-            }
-            else
-            {
-                status.Constitution = rnd.Next(6, 11);
-            }
-            
-            Console.WriteLine("Your constitution is: {0}", status.Constitution);
-            
-            ClassChoosed();
-        }
-
-        private void ClassChoosed()
+        private void ClassChoosed(Job job)
         {
-            Console.WriteLine($"You are a {status.Class}");
-            Console.WriteLine($"Your atributtes are {status.Strength} in strength, {status.Dex} in dexterity, {status.Intelligence} in intelligence," +
-                              $"{status.Charisma} in charisma and {status.Constitution} in constitution. So, you have {status.Constitution} in your health bar.");
+            Console.WriteLine($"You are a {job.JobName}");
+            Console.WriteLine($"Your atributtes are {_status.Strength} in strength, {_status.Dex} in dexterity, {_status.Intelligence} in intelligence," +
+                              $"{_status.Charisma} in charisma.");
         }
     }
 }

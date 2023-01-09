@@ -2,10 +2,17 @@ namespace CreationStatusCaracter;
 
 public class MonsterAttack
 {
-    private static Random rnd = new Random();
+    private  Random rnd = new Random();
     
-    public static int GoblinAttack()
+    public int GoblinAttack()
     {
-        return rnd.Next(2, 4);
+        Random hitRnd = new Random();
+        var chance = hitRnd.Next(0, 1);
+        if (chance == 1)
+        {
+            return rnd.Next(2, 4);
+        }
+
+        return 0;
     }
 }
