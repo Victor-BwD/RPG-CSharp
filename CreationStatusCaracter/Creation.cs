@@ -14,7 +14,7 @@ namespace CreationStatusCaracter {
 
         public PlayerCharacter CreationCharacter()
         {
-            InitFunction(out var name, out var job);
+            InitFunction(out var name, out var job, out var weapon);
 
             Console.WriteLine("Lets choose your atributtes...");
             Console.Write("Choose the points of atribbuttes between: ");
@@ -22,13 +22,13 @@ namespace CreationStatusCaracter {
 
             DistributeStatus();
 
-            ClassChoosed(job);
+            ClassChoosed(job, weapon);
 
             Console.WriteLine("Your character is created!");
             return new PlayerCharacter(name, job, _status);
         }
 
-        private void InitFunction(out string name, out Job job)
+        private void InitFunction(out string name, out Job job, out Weapons weapon)
         {
             Console.WriteLine("----------- Welcome to my RPG made in C# -----------");
             Console.WriteLine("Let's make create your character in a RPG");
@@ -39,6 +39,7 @@ namespace CreationStatusCaracter {
             {
                 Console.WriteLine("Your job: ");
                 job = Job.Create(Console.ReadLine());
+                weapon = Weapons.Equip(job.JobName);
             } while (ReferenceEquals(job, null));
         }
 
@@ -105,9 +106,12 @@ namespace CreationStatusCaracter {
         //     ClassChoosed();
         // }
 
-        private void ClassChoosed(Job job)
+        private void ClassChoosed(Job job, Weapons weapon)
         {
             Console.WriteLine($"You are a {job.JobName}");
+            
+            Console.WriteLine($"you have a {weapon.WeaponName}");
+            
             Console.WriteLine($"Your atributtes are {_status.Strength} in strength, {_status.Dex} in dexterity, {_status.Intelligence} in intelligence," +
                               $"{_status.Charisma} in charisma.");
         }

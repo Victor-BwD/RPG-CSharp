@@ -21,5 +21,7 @@ public class FirstEncouter
         {
             throw new ArgumentOutOfRangeException("value", ("Oh, it's a shame... good bye."));
         }
+
+        
     }
 }

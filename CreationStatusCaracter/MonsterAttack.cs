@@ -10,7 +10,7 @@ public class MonsterAttack
         var chance = hitRnd.Next(0, 1);
         if (chance == 1)
         {
-            return rnd.Next(2, 4);
+            return rnd.Next(1, 2);
         }
 
         return 0;

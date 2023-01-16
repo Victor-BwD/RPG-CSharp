@@ -5,6 +5,7 @@ public class PlayerCharacter
     public string Name { get; private set; }
     public int hp { get; private set; }
     private Job job;
+    private Weapons weapon;
     private Status status;
     
 
@@ -17,4 +18,6 @@ public class PlayerCharacter
 
     public string JobName => job.JobName;
     public int HpMax => job.Hp;
+
+    public string WeaponName => weapon.WeaponName;
 }

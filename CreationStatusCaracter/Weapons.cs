@@ -13,10 +13,10 @@ public interface Weapons
         if (ReferenceEquals(name, null)) return null;
         return name.Trim().ToLower() switch
         {
-            "sword" => new Sword(),
+            "warrior" => new Sword(),
             "greatsword" => new Greatsword(),
-            "dagger" => new Dagger(),
-            "staff" => new Staff(),
+            "rogue" => new Dagger(),
+            "wizard" => new Staff(),
             _ => null
         };
     }
