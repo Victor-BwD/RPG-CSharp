@@ -18,7 +18,6 @@ public interface Job
             _ => null
         };
     }
-
 }
 
 public class Warrior: Job
