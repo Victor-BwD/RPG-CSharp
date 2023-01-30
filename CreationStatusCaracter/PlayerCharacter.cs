@@ -9,11 +9,12 @@ public class PlayerCharacter
     private Status status;
     
 
-    public PlayerCharacter(string name, Job job, Status status)
+    public PlayerCharacter(string name, Job job, Status status, Weapons weapon)
     {
         this.Name = name;
         this.job = job;
         this.status = status;
+        this.weapon = weapon;
     }
 
     public string JobName => job.JobName;

@@ -5,6 +5,13 @@ public class FirstEncouter
     
     public void FirstContact(PlayerCharacter playerCharacter)
     {
+        if (playerCharacter.JobName.ToLower() == "wizard")
+        {
+            MageGame mageGame = new MageGame();
+            mageGame.MageBegins(playerCharacter);
+            return;
+        }
+        
         Console.WriteLine("You're in a tavern drinking and an old man approaches you with a paper...");
         Console.WriteLine("The man appears to be a sage or something. He shows you a contract with a prize. You must go to the dungeon and find an artifact.");
         Console.WriteLine($"- I see that you are a {playerCharacter.JobName.ToLower()} with incredible potential. Please, some goblins stole my mystical artifact. Can you get it for me? I can pay very well.");
@@ -33,6 +40,8 @@ public class FirstEncouter
         if (rndNumber < 11)
         {
             Console.WriteLine("They see you, a goblin jumps in front of you and attacks you!");
+
+            Console.WriteLine($"You get your {playerCharacter.WeaponName.ToLower()}");
         }
     }
 }

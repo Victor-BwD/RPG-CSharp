@@ -25,7 +25,7 @@ namespace CreationStatusCaracter {
             ClassChoosed(job, weapon);
 
             Console.WriteLine("Your character is created!");
-            return new PlayerCharacter(name, job, _status);
+            return new PlayerCharacter(name, job, _status, weapon);
         }
 
         private void InitFunction(out string name, out Job job, out Weapons weapon)
