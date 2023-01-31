@@ -6,6 +6,8 @@ public interface Job
 
     int Hp { get; }
     int StrengthMultiplier();
+    
+    int Dodge { get; }
 
     static Job? Create(string name)
     {
@@ -30,6 +32,8 @@ public class Warrior: Job
     {
         return 5;
     }
+
+    public int Dodge => 3;
 }
 
 public class Wizard: Job
@@ -42,6 +46,8 @@ public class Wizard: Job
     {
         return 1;
     }
+
+    public int Dodge => 4;
 }
 
 public class Rogue: Job
@@ -54,4 +60,6 @@ public class Rogue: Job
     {
         return 2;
     }
+
+    public int Dodge => 6;
 }

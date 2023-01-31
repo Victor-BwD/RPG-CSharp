@@ -19,6 +19,6 @@ public class PlayerCharacter
 
     public string JobName => job.JobName;
     public int HpMax => job.Hp;
-
+    public int Dodge => job.Dodge;
     public string WeaponName => weapon.WeaponName;
 }
