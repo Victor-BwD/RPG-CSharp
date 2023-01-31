@@ -5,7 +5,7 @@ public class FirstEncouter
     
     public void FirstContact(PlayerCharacter playerCharacter)
     {
-        
+        var actualHp = playerCharacter.HpMax;
         
         if (playerCharacter.JobName.ToLower() == "wizard")
         {
@@ -48,14 +48,12 @@ public class FirstEncouter
         if (rndNumber < 11)
         {
             Console.WriteLine("They see you, a goblin jumps in front of you and attacks you!");
-            GoblinFight(playerCharacter);
+            GoblinFight(playerCharacter, actualHp);
         }
     }
 
-    private void GoblinFight(PlayerCharacter playerCharacter)
+    private void GoblinFight(PlayerCharacter playerCharacter, int hp)
     {
-        var actualHp = playerCharacter.HpMax;
-        
         Console.WriteLine($"You get your {playerCharacter.WeaponName.ToLower()}");
         
         Goblin goblin = new Goblin();
@@ -68,9 +66,14 @@ public class FirstEncouter
             Console.WriteLine("The monster missed the attack. you managed to dodge.");
         }
         else {
-            Console.WriteLine($"You failed to dodge and received {goblin.Damage} damage in your health points.");
-            actualHp -= goblin.Damage;
-            Console.WriteLine($"You have {actualHp} health points now.");
+           GoblinAttack(goblin, hp);
         }
+    }
+    
+    private void GoblinAttack(Goblin goblin, int hp)
+    {
+        Console.WriteLine($"You failed to dodge and received {goblin.Damage} damage in your health points.");
+        hp -= goblin.Damage;
+        Console.WriteLine($"You have {hp} health points now.");
     }
 }
