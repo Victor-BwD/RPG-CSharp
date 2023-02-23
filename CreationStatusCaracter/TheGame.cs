@@ -2,12 +2,10 @@ namespace CreationStatusCaracter;
 
 public class FirstEncouter
 {
-    
     public void FirstContact(PlayerCharacter playerCharacter) {
     var actualHp = playerCharacter.HpMax;
     
-    if (playerCharacter.JobName.ToLower() == "wizard")
-    {
+    if (playerCharacter.JobName.ToLower() == "wizard") {
         MageGame mageGame = new MageGame();
         mageGame.MageBegins(playerCharacter);
         return;
@@ -19,23 +17,20 @@ public class FirstEncouter
 
     DisplayQuestOffer(playerName);
 
-    if (!AskPlayerAcceptance())
-    {
+    if (!AskPlayerAcceptance()) {
         Console.WriteLine("Oh, it's a shame... good bye.");
         return;
     }
 
     DisplayQuestStart(playerName);
 
-    if (!TryHideFromGoblins())
-    {
+    if (!TryHideFromGoblins()) {
         Console.WriteLine("They see you, a goblin jumps in front of you and attacks you!");
         GoblinFight(playerCharacter, actualHp);
     }
     }
 
-    private void DisplayIntroduction(PlayerCharacter playerCharacter)
-    {
+    private void DisplayIntroduction(PlayerCharacter playerCharacter) {
         Console.WriteLine("You're in a tavern drinking and an old man approaches you with a paper...");
         Console.WriteLine();
         Console.WriteLine("The man appears to be a sage or something. He shows you a contract with a prize. You must go to the dungeon and find an artifact.");
@@ -44,8 +39,7 @@ public class FirstEncouter
         Console.WriteLine();
     }
 
-    private string AskPlayerName(string defaultName)
-    {
+    private string AskPlayerName(string defaultName) {
         Console.WriteLine($"- Please, can you tell me your name? ");
         var playerName = Console.ReadLine();
 
@@ -59,19 +53,16 @@ public class FirstEncouter
         return playerName;
     }
 
-    private void DisplayQuestOffer(string playerName)
-    {
+    private void DisplayQuestOffer(string playerName) {
         Console.WriteLine($"- Glad to meet you, {playerName}. So, you'll help me? (YES or NO)");
     }
 
-    private bool AskPlayerAcceptance()
-    {
+    private bool AskPlayerAcceptance() {
         string accept = Console.ReadLine().ToUpper();
         return accept == "YES";
     }
 
-    private void DisplayQuestStart(string playerName)
-    {
+    private void DisplayQuestStart(string playerName) {
         Console.WriteLine("You leave the tavern, holding a piece of paper the old man gave to you. In it is a coordinate for a dungeon, it says that it contains a lost sacred tome that belonged to the old master of this strange person.");
         Console.WriteLine();
         Console.WriteLine($"You are an experienced {playerName.ToLower()}, you recognize the region, you know that to go to this dungeon you will have to face a not very inviting forest.");
@@ -81,8 +72,7 @@ public class FirstEncouter
         Console.WriteLine("You still have a few km to walk inside the forest. You need to roll the dice and roll a number greater than 11 so that you can hide from the goblins and not be attacked. Roll the dice now...");
     }
 
-    private bool TryHideFromGoblins()
-    {
+    private bool TryHideFromGoblins() {
         Random forestDice = new Random();
         int rndNumber = forestDice.Next(1, 20);
     
@@ -96,8 +86,7 @@ public class FirstEncouter
     }
 
 
-    private void GoblinFight(PlayerCharacter playerCharacter, int hp)
-    {
+    private void GoblinFight(PlayerCharacter playerCharacter, int hp) {
         Console.WriteLine($"You get your {playerCharacter.WeaponName.ToLower()}");
     
         var rng = new Random();
@@ -113,8 +102,7 @@ public class FirstEncouter
         }
     }
 
-    private void TakeDamageFromGoblin(PlayerCharacter playerCharacter, int hp)
-    {
+    private void TakeDamageFromGoblin(PlayerCharacter playerCharacter, int hp) {
         var goblin = new Goblin();
         Console.WriteLine($"You failed to dodge and received {goblin.Damage} damage to your health points.");
         hp -= goblin.Damage;
