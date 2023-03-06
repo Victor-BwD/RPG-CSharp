@@ -1,6 +1,6 @@
-namespace CreationStatusCaracter;
+namespace GameRPG;
 
-public interface Job
+public interface IJob
 {
     string JobName { get; }
 
@@ -9,7 +9,7 @@ public interface Job
     
     int Dodge { get; }
 
-    static Job? Create(string name)
+    static IJob? Create(string name)
     {
         if (ReferenceEquals(name, null)) return null;
         return name.Trim().ToLower() switch
@@ -22,7 +22,7 @@ public interface Job
     }
 }
 
-public class Warrior: Job
+public class Warrior: IJob
 {
     public string JobName => "Warrior";
 
@@ -36,7 +36,7 @@ public class Warrior: Job
     public int Dodge => 3;
 }
 
-public class Wizard: Job
+public class Wizard: IJob
 {
     public string JobName => "Wizard";
 
@@ -50,7 +50,7 @@ public class Wizard: Job
     public int Dodge => 4;
 }
 
-public class Rogue: Job
+public class Rogue: IJob
 {
     public string JobName => "Rogue";
 
