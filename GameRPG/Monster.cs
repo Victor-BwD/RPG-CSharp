@@ -25,3 +25,23 @@ public abstract class Monster
         // Implementação do recebimento de dano pelo monstro
     }
 }
+
+public class Goblin : Monster
+{
+    public Goblin() : base("Goblin", 1, 10, 2)
+    {
+        
+    }
+    
+    public override void Attack(PlayerCharacter player)
+    {
+        base.Attack(player);
+        // Implementação específica do ataque do Goblin ao jogador
+    }
+    
+    public override void ReceiveDamage(int damage)
+    {
+        base.ReceiveDamage(damage);
+        // Implementação específica do recebimento de dano pelo Goblin
+    }
+}
