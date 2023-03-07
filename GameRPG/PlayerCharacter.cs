@@ -17,6 +17,11 @@ public class PlayerCharacter
 
     public string JobName => _job.JobName;
     public int HpMax => _job.Hp;
+    public int Hp
+    {
+        get { return _job.Hp; }
+        
+    }
     public int Dodge => _job.Dodge;
 
     public string DisplayCharacterInfo()
