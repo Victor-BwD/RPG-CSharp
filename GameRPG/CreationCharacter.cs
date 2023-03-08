@@ -3,6 +3,7 @@ namespace GameRPG;
 public class CreationCharacter
 {
     private readonly List<int> _statsNumbers = new () { 15, 12, 10, 8 };
+    private readonly List<string> _jobs = new() { "warrior", "mage", "rogue" };
 
     public void CreateCharacter()
     {
@@ -35,6 +36,13 @@ public class CreationCharacter
         {
             Console.WriteLine("Choose between Warrior, Mage or Rogue: ");
             input = Console.ReadLine().ToLower().Trim();
+            
+            while (!_jobs.Contains(input)) // Não contém
+            {
+                Console.WriteLine("Choose between Warrior, Mage or Rogue: ");
+                input = Console.ReadLine().ToLower().Trim();
+            }
+            
             job = IJob.Create(input);
         } while (ReferenceEquals(job, null));
         
