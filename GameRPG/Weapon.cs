@@ -13,7 +13,7 @@ public abstract class Weapon
         MaxDamage = maxDamage;
     }
 
-    public abstract void Attack(PlayerCharacter attacker, PlayerCharacter target);
+    public abstract void Attack(Monster target);
 }
 
 public class Sword : Weapon
@@ -22,9 +22,11 @@ public class Sword : Weapon
     {
     }
 
-    public override void Attack(PlayerCharacter attacker, PlayerCharacter target)
+    public override void Attack(Monster target)
     {
         var rnd = new Random();
         int damage = rnd.Next(MinDamage, MaxDamage + 1);
+        target.ReceiveDamage(damage);
+        
     }
 }

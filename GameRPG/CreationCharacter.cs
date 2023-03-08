@@ -12,11 +12,10 @@ public class CreationCharacter
         var name = Console.ReadLine().Trim();
         while (string.Equals(name, ""))
         {
+            Console.WriteLine("Is not possible create a character with no name...");
             CreateCharacter();
         }
-        
-        Console.WriteLine("Choose between Warrior, Mage or Rogue: ");
-        
+
         var job = ChooseJob();
 
         DistributeStatus(out Status stats);
@@ -30,10 +29,14 @@ public class CreationCharacter
     private IJob ChooseJob()
     {
         IJob job;
+        string input;
+        
         do
         {
-            job = IJob.Create(Console.ReadLine().ToLower()) ?? throw new InvalidOperationException();
-        } while (ReferenceEquals(job, null));
+            Console.WriteLine("Choose between Warrior, Mage or Rogue: ");
+            input = Console.ReadLine().ToLower().Trim();
+            job = IJob.Create(input);
+        } while (ReferenceEquals(job, null) || input != "warrior" || input != "mage" || input != "rogue");
         
         PlayerCharacter.SetLevel(1);
 

@@ -41,7 +41,6 @@ public class Goblin : Monster
     
     public override void ReceiveDamage(int damage)
     {
-        base.ReceiveDamage(damage);
         // Implementação específica do recebimento de dano pelo Goblin
     }
 }
@@ -49,6 +48,25 @@ public class Goblin : Monster
 public class Minotaur : Monster
 {
     public Minotaur() : base("Minotaur", 2, 13, 4)
+    {
+    }
+    
+    public override void Attack(PlayerCharacter player)
+    {
+        base.Attack(player);
+        // Implementação específica do ataque do Goblin ao jogador
+    }
+    
+    public override void ReceiveDamage(int damage)
+    {
+        base.ReceiveDamage(damage);
+        // Implementação específica do recebimento de dano pelo Goblin
+    }
+}
+
+public class Vampire : Monster
+{
+    public Vampire() : base("Vampire", 3, 16, 5)
     {
     }
     
