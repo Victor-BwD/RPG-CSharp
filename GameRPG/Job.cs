@@ -47,7 +47,22 @@ public class Wizard: IJob
         return 1;
     }
 
-    public int Dodge => 4;
+    public int Dodge => 6;
+    
+    private readonly List<ISpell> _spells = new List<ISpell> { new Fireball() };
+
+    public void CastSpell(string spellName, Monster monster)
+    {
+        var spell = _spells.FirstOrDefault(x => x.Name.Equals(spellName, StringComparison.OrdinalIgnoreCase));
+
+        if (spell == null)
+        {
+            Console.WriteLine($"You don't know the spell '{spellName}'");
+            return;
+        }
+
+        spell.Cast(monster);
+    }
 }
 
 public class Rogue: IJob
@@ -61,5 +76,5 @@ public class Rogue: IJob
         return 2;
     }
 
-    public int Dodge => 6;
+    public int Dodge => 8;
 }
