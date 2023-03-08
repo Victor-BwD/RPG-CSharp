@@ -36,7 +36,7 @@ public class CreationCharacter
             Console.WriteLine("Choose between Warrior, Mage or Rogue: ");
             input = Console.ReadLine().ToLower().Trim();
             job = IJob.Create(input);
-        } while (ReferenceEquals(job, null) || input != "warrior" || input != "mage" || input != "rogue");
+        } while (ReferenceEquals(job, null));
         
         PlayerCharacter.SetLevel(1);
 
