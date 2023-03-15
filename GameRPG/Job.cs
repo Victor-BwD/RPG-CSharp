@@ -50,7 +50,7 @@ public class Wizard: IJob
     public int Dodge => 6;
     
     private readonly List<ISpell> _spells = new List<ISpell> { new Fireball() };
-
+    
     public void CastSpell(string spellName, Monster monster)
     {
         var spell = _spells.FirstOrDefault(x => x.Name.Equals(spellName, StringComparison.OrdinalIgnoreCase));

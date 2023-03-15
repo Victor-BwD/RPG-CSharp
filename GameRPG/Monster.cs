@@ -7,12 +7,15 @@ public abstract class Monster
     public int HealthPoints { get; protected set; }
     public int AttackPower { get; protected set; }
     
-    public Monster(string name, int level, int healthPoints, int attackPower)
+    public int Dodge { get; protected set; }
+
+    public Monster(string name, int level, int healthPoints, int attackPower, int dodge)
     {
         Name = name;
         Level = level;
         HealthPoints = healthPoints;
         AttackPower = attackPower;
+        Dodge = dodge;
     }
     
     public virtual void Attack(PlayerCharacter player)
@@ -28,7 +31,7 @@ public abstract class Monster
 
 public class Goblin : Monster
 {
-    public Goblin() : base("Goblin", 1, 10, 2)
+    public Goblin() : base("Goblin", 1, 10, 2, 3)
     {
         
     }
@@ -41,13 +44,13 @@ public class Goblin : Monster
     
     public override void ReceiveDamage(int damage)
     {
-        // Implementação específica do recebimento de dano pelo Goblin
+        
     }
 }
 
 public class Minotaur : Monster
 {
-    public Minotaur() : base("Minotaur", 2, 13, 4)
+    public Minotaur() : base("Minotaur", 2, 13, 4, 4)
     {
     }
     
@@ -66,7 +69,7 @@ public class Minotaur : Monster
 
 public class Vampire : Monster
 {
-    public Vampire() : base("Vampire", 3, 16, 5)
+    public Vampire() : base("Vampire", 3, 16, 5, 7)
     {
     }
     
