@@ -15,7 +15,7 @@ public interface IJob
         return name.Trim().ToLower() switch
         {
             "warrior" => new Warrior(),
-            "wizard" => new Wizard(),
+            "mage" => new Mage(),
             "rogue" => new Rogue(),
             _ => null
         };
@@ -36,7 +36,7 @@ public class Warrior: IJob
     public int Dodge => 3;
 }
 
-public class Wizard: IJob
+public class Mage: IJob
 {
     public string JobName => "Wizard";
 
