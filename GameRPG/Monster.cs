@@ -38,13 +38,13 @@ public class Goblin : Monster
     
     public override void Attack(PlayerCharacter player)
     {
-        base.Attack(player);
-        // Implementação específica do ataque do Goblin ao jogador
+        var damage = new Random().Next(1, 3);
+        player.Hp -= damage;
     }
     
     public override void ReceiveDamage(int damage)
     {
-        
+        HealthPoints -= damage;
     }
 }
 
