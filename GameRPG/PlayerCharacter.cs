@@ -27,7 +27,7 @@ public class PlayerCharacter
 
     public string DisplayCharacterInfo()
     {
-        return $"Name: {_name}, strength: {_stats.Strength}, dexterity: {_stats.Dexterity}, intelligence: {_stats.Intelligence}, charisma: {_stats.Intelligence}. Your character is lvl {_level}.";
+        return $"Name: {_name}, strength: {_stats.GetStrength()}, dexterity: {_stats.GetDex()}, intelligence: {_stats.GetIntelligence()}, charisma: {_stats.GetCharisma()}. Your character is lvl {_level}.";
     }
 
     public static void SetLevel(int level)

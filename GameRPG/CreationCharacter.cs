@@ -17,17 +17,19 @@ public class CreationCharacter
             CreateCharacter();
         }
 
-        var job = ChooseJob();
+        var status = new Status();
 
-        DistributeStatus(out Status stats);
+        var job = ChooseJob(status);
 
-        PlayerCharacter playerCharacter = new PlayerCharacter(name, job, stats);
+        DistributeStatus(status);
+
+        PlayerCharacter playerCharacter = new PlayerCharacter(name, job, status);
         var display = playerCharacter.DisplayCharacterInfo();
         ClassChoosed(job);
         Console.WriteLine(display);
     }
 
-    private IJob ChooseJob()
+    private IJob ChooseJob(Status status)
     {
         IJob job;
         string input;
@@ -43,7 +45,7 @@ public class CreationCharacter
                 input = Console.ReadLine().ToLower().Trim();
             }
             
-            job = IJob.Create(input);
+            job = IJob.Create(input, status);
         } while (ReferenceEquals(job, null));
         
         PlayerCharacter.SetLevel(1);
@@ -51,39 +53,38 @@ public class CreationCharacter
         return job;
     }
     
-    private void DistributeStatus(out Status stats)
+    private void DistributeStatus(Status status)
     {
-        stats = new Status();
-        
+
         do
         {
             Console.Write("Strength: ");
-            stats.Strength = int.Parse(Console.ReadLine());
-        } while (!_statsNumbers.Contains(stats.Strength));
+            status.SetStrength(int.Parse(Console.ReadLine()));
+        } while (!_statsNumbers.Contains(status.GetStrength()));
 
-        _statsNumbers.Remove(stats.Strength);
+        _statsNumbers.Remove(status.GetStrength());
 
         do
         {
             Console.Write("Dexterity: ");
-            stats.Dexterity = int.Parse(Console.ReadLine());
-        } while (!_statsNumbers.Contains(stats.Dexterity));
+            status.SetDexterity(int.Parse(Console.ReadLine()));
+        } while (!_statsNumbers.Contains(status.GetDex()));
 
-        _statsNumbers.Remove(stats.Dexterity);
+        _statsNumbers.Remove(status.GetDex());
 
         do
         {
             Console.Write("Intelligence: ");
-            stats.Intelligence = int.Parse(Console.ReadLine());
-        } while (!_statsNumbers.Contains(stats.Intelligence));
+            status.SetIntelligence(int.Parse(Console.ReadLine()));
+        } while (!_statsNumbers.Contains(status.GetIntelligence()));
         
-        _statsNumbers.Remove(stats.Intelligence);
+        _statsNumbers.Remove(status.GetIntelligence());
 
         do
         {
             Console.Write("Charisma: ");
-            stats.Charisma = int.Parse(Console.ReadLine());
-        } while (!_statsNumbers.Contains(stats.Charisma));
+            status.SetCharisma(int.Parse(Console.ReadLine()));
+        } while (!_statsNumbers.Contains(status.GetCharisma()));
     }
 
     private void ClassChoosed(IJob job)

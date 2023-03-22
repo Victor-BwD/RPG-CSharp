@@ -3,20 +3,32 @@ namespace GameRPG;
 public interface IJob
 {
     string JobName { get; }
-
     int Hp { get; }
-    int StrengthMultiplier();
-    
     int Dodge { get; }
 
-    static IJob? Create(string name)
+    static IJob? Create(string name, Status status)
     {
         if (ReferenceEquals(name, null)) return null;
         return name.Trim().ToLower() switch
         {
-            "warrior" => new Warrior(),
-            "mage" => new Mage(),
-            "rogue" => new Rogue(),
+            "warrior" => new Warrior(status, new Build()
+            {
+                AttackPerStrength = 2.0f,
+                AttackPerDex = 1.5f,
+                AttackPerIntelligence = 1.0f
+            }),
+            "mage" => new Mage(status, new Build()
+            {
+                AttackPerStrength = 1.0f,
+                AttackPerDex = 1.5f,
+                AttackPerIntelligence = 2.0f
+            }),
+            "rogue" => new Rogue(status, new Build()
+            {
+                AttackPerStrength = 1.5f,
+                AttackPerDex = 2.0f,
+                AttackPerIntelligence = 1.0f
+            }),
             _ => null
         };
     }
@@ -24,13 +36,22 @@ public interface IJob
 
 public class Warrior: IJob
 {
+    private Status _status;
+    private Build _build;
+
+    public Warrior(Status status, Build build)
+    {
+        _status = status;
+        _build = build;
+    }
+    
     public string JobName => "Warrior";
 
     public int Hp => 15;
 
     public int StrengthMultiplier()
     {
-        return 5;
+        return Convert.ToInt32(_status.GetStrength() * _build.AttackPerStrength);
     }
 
     public int Dodge => 3;
@@ -38,6 +59,15 @@ public class Warrior: IJob
 
 public class Mage: IJob
 {
+    
+    private Status _status;
+    private Build _build;
+
+    public Mage(Status status, Build build)
+    {
+        _status = status;
+        _build = build;
+    }
     public string JobName => "Wizard";
 
     public int Hp => 6;
@@ -67,6 +97,14 @@ public class Mage: IJob
 
 public class Rogue: IJob
 {
+    private Status _status;
+    private Build _build;
+
+    public Rogue(Status status, Build build)
+    {
+        _status = status;
+        _build = build;
+    }
     public string JobName => "Rogue";
 
     public int Hp => 8;
