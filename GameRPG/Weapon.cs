@@ -13,20 +13,62 @@ public abstract class Weapon
         MaxDamage = maxDamage;
     }
 
-    public abstract void Attack(Monster target);
+    public abstract int CalculateDamage();
 }
 
 public class Sword : Weapon
 {
+    private int _minDamage;
+    private int _maxDamage;
+    private string _name;
+    
     public Sword(string name, int minDamage, int maxDamage) : base(name, minDamage, maxDamage)
     {
+        _maxDamage = maxDamage;
+        _minDamage = minDamage;
+        _name = name;
     }
-
-    public override void Attack(Monster target)
+    
+    public override int CalculateDamage()
     {
-        var rnd = new Random();
-        int damage = rnd.Next(MinDamage, MaxDamage + 1);
-        target.ReceiveDamage(damage);
-        
+        return new Random().Next(_minDamage, _maxDamage);
+    }
+}
+
+public class Staff : Weapon
+{
+    private int _minDamage;
+    private int _maxDamage;
+    private string _name;
+    
+    public Staff(string name, int minDamage, int maxDamage) : base(name, minDamage, maxDamage)
+    {
+        _maxDamage = maxDamage;
+        _minDamage = minDamage;
+        _name = name;
+    }
+    
+    public override int CalculateDamage()
+    {
+        return new Random().Next(_minDamage, _maxDamage);
+    }
+}
+
+public class Dagger : Weapon
+{
+    private int _minDamage;
+    private int _maxDamage;
+    private string _name;
+    
+    public Dagger(string name, int minDamage, int maxDamage) : base(name, minDamage, maxDamage)
+    {
+        _maxDamage = maxDamage;
+        _minDamage = minDamage;
+        _name = name;
+    }
+    
+    public override int CalculateDamage()
+    {
+        return new Random().Next(_minDamage, _maxDamage);
     }
 }
