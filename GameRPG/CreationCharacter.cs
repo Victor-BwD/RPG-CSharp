@@ -27,6 +27,9 @@ public class CreationCharacter
         var display = playerCharacter.DisplayCharacterInfo();
         ClassChoosed(job);
         Console.WriteLine(display);
+
+        StartCampaign startCampaign = new StartCampaign(playerCharacter, job);
+        startCampaign.StartGame();
     }
 
     private IJob ChooseJob(Status status)
@@ -55,7 +58,6 @@ public class CreationCharacter
     
     private void DistributeStatus(Status status)
     {
-
         do
         {
             Console.Write("Strength: ");

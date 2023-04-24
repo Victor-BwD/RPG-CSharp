@@ -23,3 +23,21 @@ public class Fireball : ISpell
         }
     }
 }
+
+public class Lightning : ISpell
+{
+    public string Name { get; }
+    public void Cast(Monster monster)
+    {
+        var rng = new Random().Next(1, 20);
+        if (rng > monster.Dodge)
+        {
+            var damage = new Random().Next(2, 5);
+            monster.ReceiveDamage(damage);
+        }
+        else
+        {
+            Console.WriteLine("The monster managed to dodge.");
+        }
+    }
+}

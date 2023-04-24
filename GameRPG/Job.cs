@@ -95,7 +95,7 @@ public class Mage: IJob
         monster.ReceiveDamage(damage);
     }
 
-    private readonly List<ISpell> _spells = new List<ISpell> { new Fireball() };
+    private readonly List<ISpell> _spells = new List<ISpell> { new Fireball(), new Lightning() };
     
     public void CastSpell(string spellName, Monster monster)
     {
