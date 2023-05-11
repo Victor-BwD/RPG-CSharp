@@ -14,5 +14,9 @@ public class StartCampaign
     public void StartGame()
     {
         Console.WriteLine();
+        var goblin = new Goblin();
+        goblin.Attack(_playerCharacter);
+        Console.WriteLine($"O goblin atacou o jogador com poder de ataque {goblin.PowerAttack} e causou {goblin.Damage} de dano.");
+        Console.WriteLine($"A vida do jogador agora é {_playerCharacter.ActualHp}.");
     }
 }

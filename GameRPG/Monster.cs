@@ -31,15 +31,18 @@ public abstract class Monster
 
 public class Goblin : Monster
 {
+    public int PowerAttack { get; protected set; }
+    public int Damage { get; protected set; }
+
     public Goblin() : base("Goblin", 1, 10, 2, 3)
     {
-        
+        PowerAttack = 2;
     }
     
     public override void Attack(PlayerCharacter player)
     {
-        var damage = new Random().Next(1, 3);
-        player.Hp -= damage;
+        Damage = new Random().Next(1, 3) + PowerAttack;
+        player.Hp -= Damage;
     }
     
     public override void ReceiveDamage(int damage)

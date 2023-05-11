@@ -16,13 +16,13 @@ public class PlayerCharacter
         _job = job;
     }
 
-    private int actualHp;
+    public int ActualHp;
 
     public string JobName => _job.JobName;
     public int Hp
     {
         get => _job.Hp;
-        set => actualHp = value;
+        set => ActualHp = value;
     }
     public int Dodge => _job.Dodge;
 
