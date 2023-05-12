@@ -22,6 +22,8 @@ public class PlayerCharacter
     public int Hp
     {
         get => _job.Hp;
+
+       
         set => ActualHp = value;
     }
     public int Dodge => _job.Dodge;
@@ -30,6 +32,19 @@ public class PlayerCharacter
     {
         return $"Name: {_name}, strength: {_stats.GetStrength()}, dexterity: {_stats.GetDex()}, intelligence: {_stats.GetIntelligence()}, charisma: {_stats.GetCharisma()}. Your character is lvl {_level}.";
     }
+
+    public void Heal(int amount)
+    {
+        if (ActualHp + amount > _job.Hp)
+        {
+            ActualHp = _job.Hp;
+        }
+        else
+        {
+            ActualHp += amount;
+        }
+    }
+
 
     public string DisplayLevel()
     {
