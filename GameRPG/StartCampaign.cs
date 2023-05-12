@@ -13,7 +13,7 @@ public class StartCampaign
 
     public void StartGame()
     {
-        Console.WriteLine("");
+        Console.WriteLine("You enter the cave and begin to explore. Soon you come across a group of goblins, who are guarding the entrance to the treasure. You need to defeat them in order to pass.");
         
     }
 }
