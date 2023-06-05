@@ -66,6 +66,8 @@ public class CreationCharacter
     
     private void DistributeStatus(Status status)
     {
+        ShowValidStats();
+
         do
         {
             Console.Write("Strength: ");
@@ -73,6 +75,7 @@ public class CreationCharacter
         } while (!_statsNumbers.Contains(status.GetStrength()));
 
         _statsNumbers.Remove(status.GetStrength());
+        ShowValidStats();
 
         do
         {
@@ -81,6 +84,7 @@ public class CreationCharacter
         } while (!_statsNumbers.Contains(status.GetDex()));
 
         _statsNumbers.Remove(status.GetDex());
+        ShowValidStats();
 
         do
         {
@@ -89,6 +93,7 @@ public class CreationCharacter
         } while (!_statsNumbers.Contains(status.GetIntelligence()));
         
         _statsNumbers.Remove(status.GetIntelligence());
+        ShowValidStats();
 
         do
         {
@@ -100,5 +105,12 @@ public class CreationCharacter
     private void ClassChoosed(IJob job)
     {
         Console.WriteLine($"You are a {job.JobName}, with {job.Hp} Max Hp and you capacity to dodge attack is {job.Dodge}");
+    }
+
+    private void ShowValidStats()
+    {
+        Console.WriteLine("You have the following attributes to distribute among your stats: ");
+        string numbersString = string.Join(", ", _statsNumbers);
+        Console.WriteLine(numbersString);
     }
 }
