@@ -18,6 +18,8 @@ public class PlayerCharacter
 
     public int ActualHp;
 
+    public string PlayerName => _name;
+
     public string JobName => _job.JobName;
     public int Hp
     {
@@ -68,5 +70,10 @@ public class PlayerCharacter
     public static void SetLevel(int level)
     {
         _level = level;
+    }
+
+    public void SetHp()
+    {
+        ActualHp = Hp;
     }
 }

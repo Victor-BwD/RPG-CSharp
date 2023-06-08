@@ -8,6 +8,7 @@ public abstract class Monster
     public int AttackPower { get; protected set; }
     
     public int Dodge { get; protected set; }
+    public int Iniciative { get; protected set; }
 
     public Monster(string name, int level, int healthPoints, int attackPower, int dodge)
     {
@@ -37,12 +38,14 @@ public class Goblin : Monster
     public Goblin() : base("Goblin", 1, 10, 2, 3)
     {
         PowerAttack = 2;
+        Iniciative = 4;
     }
     
     public override void Attack(PlayerCharacter player)
     {
-        Damage = new Random().Next(1, 3) + PowerAttack;
-        player.Hp -= Damage;
+        Damage = new Random().Next(1, 2) + PowerAttack;
+        player.ActualHp -= Damage;
+        Console.WriteLine($"{player.PlayerName} lost {Damage} health points");
     }
     
     public override void ReceiveDamage(int damage)
@@ -55,6 +58,7 @@ public class Minotaur : Monster
 {
     public Minotaur() : base("Minotaur", 2, 13, 4, 4)
     {
+        Iniciative = 5;
     }
     
     public override void Attack(PlayerCharacter player)
@@ -74,6 +78,7 @@ public class Vampire : Monster
 {
     public Vampire() : base("Vampire", 3, 16, 5, 7)
     {
+        Iniciative = 7;
     }
     
     public override void Attack(PlayerCharacter player)

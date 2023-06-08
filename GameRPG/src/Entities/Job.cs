@@ -5,6 +5,7 @@ public interface IJob
     string JobName { get; }
     int Hp { get; }
     int Dodge { get; }
+    int Iniciative { get; }
     public void Attack(Monster monster);
 
     static IJob? Create(string name, Status status)
@@ -64,6 +65,8 @@ public class Warrior: IJob
     }
 
     public int Dodge => 3;
+
+    public int Iniciative => 4;
 }
 
 public class Mage: IJob
@@ -89,6 +92,9 @@ public class Mage: IJob
     }
 
     public int Dodge => 6;
+
+    public int Iniciative => 6;
+
     public void Attack(Monster monster)
     {
         var damage = _weapon.CalculateDamage() * StatusMultiplier();
@@ -133,6 +139,9 @@ public class Rogue: IJob
     }
 
     public int Dodge => 8;
+
+    public int Iniciative => 8;
+
     public void Attack(Monster monster)
     {
         var damage = _weapon.CalculateDamage() * StatusMultiplier();
