@@ -14,13 +14,14 @@ public class StartCampaign
     public void StartGame()
     {
         _playerCharacter.SetHp();
+        var iniciative = _job.Iniciative;
 
         Console.WriteLine("You enter the cave and begin to explore. Soon you come across a group of goblins, who are guarding the entrance to the treasure. You need to defeat them in order to pass.");
         List<Goblin> goblins = CreateGoblins(2);
 
         Console.WriteLine($"{goblins.Count} goblins appears!");
 
-        if(_job.Iniciative > goblins[0].Iniciative)
+        if(iniciative > goblins[0].Iniciative)
         {
             for (int i = 0; i < goblins.Count; i++)
             {
@@ -30,6 +31,7 @@ public class StartCampaign
             // Solicitar ao jogador que escolha o número correspondente ao goblin a ser atacado
             Console.Write("Choose the goblin to attack: ");
             int selectedGoblinIndex = int.Parse(Console.ReadLine()) - 1;
+            
         }
         else
         {

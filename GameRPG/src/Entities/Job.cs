@@ -8,6 +8,7 @@ public interface IJob
     int Iniciative { get; }
     public void Attack(Monster monster);
 
+    public int GetIniciative();
     static IJob? Create(string name, Status status)
     {
         if (ReferenceEquals(name, null)) return null;
@@ -64,9 +65,16 @@ public class Warrior: IJob
         monster.ReceiveDamage(damage);
     }
 
+    public int GetIniciative()
+    {
+        var rand = new Random();
+        var d20 = rand.Next(1, 20);
+        return _status.GetDexModifier() + d20;
+    }
+
     public int Dodge => 3;
 
-    public int Iniciative => 4;
+    public int Iniciative => GetIniciative();
 }
 
 public class Mage: IJob
@@ -93,7 +101,7 @@ public class Mage: IJob
 
     public int Dodge => 6;
 
-    public int Iniciative => 6;
+    public int Iniciative => GetIniciative();
 
     public void Attack(Monster monster)
     {
@@ -114,6 +122,13 @@ public class Mage: IJob
         }
 
         spell.Cast(monster);
+    }
+
+    public int GetIniciative()
+    {
+        var rand = new Random();
+        var d20 = rand.Next(1, 20);
+        return _status.GetDexModifier() + d20;
     }
 }
 
@@ -140,11 +155,18 @@ public class Rogue: IJob
 
     public int Dodge => 8;
 
-    public int Iniciative => 8;
+    public int Iniciative => GetIniciative();
 
     public void Attack(Monster monster)
     {
         var damage = _weapon.CalculateDamage() * StatusMultiplier();
         monster.ReceiveDamage(damage);
+    }
+
+    public int GetIniciative()
+    {
+        var rand = new Random();
+        var d20 = rand.Next(1, 20);
+        return _status.GetDexModifier() + d20;
     }
 }
