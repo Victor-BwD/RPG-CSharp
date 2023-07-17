@@ -13,13 +13,19 @@ public class StartCampaign
 
     public void StartGame()
     {
+        Console.WriteLine("Entering in dungeon...");
+        Thread.Sleep(5000);
+        Console.Clear();
+
         _playerCharacter.SetHp();
         var iniciative = _job.Iniciative;
 
         Console.WriteLine("You enter the cave and begin to explore. Soon you come across a group of goblins, who are guarding the entrance to the treasure. You need to defeat them in order to pass.");
         List<Goblin> goblins = CreateGoblins(2);
+        Console.WriteLine();
 
         Console.WriteLine($"{goblins.Count} goblins appears!");
+        Console.WriteLine();
 
         if(iniciative > goblins[0].Iniciative)
         {
