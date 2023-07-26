@@ -35,7 +35,7 @@ public class Goblin : Monster
     public int PowerAttack { get; protected set; }
     public int Damage { get; protected set; }
 
-    public Goblin() : base("Goblin", 1, 10, 2, 3)
+    public Goblin() : base("Goblin", 1, 50, 2, 3)
     {
         PowerAttack = 2;
         Iniciative = 4;
@@ -43,8 +43,16 @@ public class Goblin : Monster
     
     public override void Attack(PlayerCharacter player)
     {
+        var attackHit = new Random().Next(1, 20);
+        if (attackHit > player.Dodge)
+        {
+            Console.WriteLine("You dodge the attack.");
+            return;
+        }
+
         Damage = new Random().Next(1, 2) + PowerAttack;
         player.ActualHp -= Damage;
+        Console.WriteLine("You failed to dodge the enemy's attack.");
         Console.WriteLine($"{player.PlayerName} lost {Damage} health points");
     }
     
@@ -56,8 +64,12 @@ public class Goblin : Monster
 
 public class Minotaur : Monster
 {
-    public Minotaur() : base("Minotaur", 2, 13, 4, 4)
+    public int PowerAttack { get; protected set; }
+    public int Damage { get; protected set; }
+    
+    public Minotaur() : base("Minotaur", 2, 150, 4, 4)
     {
+        PowerAttack = 4;
         Iniciative = 5;
     }
     
@@ -76,20 +88,32 @@ public class Minotaur : Monster
 
 public class Vampire : Monster
 {
-    public Vampire() : base("Vampire", 3, 16, 5, 7)
+    public int PowerAttack { get; protected set; }
+    public int Damage { get; protected set; }
+    
+    public Vampire() : base("Vampire", 3, 250, 5, 7)
     {
+        PowerAttack = 5;
         Iniciative = 7;
     }
     
     public override void Attack(PlayerCharacter player)
     {
-        base.Attack(player);
-        // Implementação específica do ataque do Goblin ao jogador
+        var attackHit = new Random().Next(1, 20);
+        if (attackHit > player.Dodge)
+        {
+            Console.WriteLine("You dodge the attack.");
+            return;
+        }
+
+        Damage = new Random().Next(1, 2) + PowerAttack;
+        player.ActualHp -= Damage;
+        Console.WriteLine("You failed to dodge the enemy's attack.");
+        Console.WriteLine($"{player.PlayerName} lost {Damage} health points");
     }
     
     public override void ReceiveDamage(int damage)
     {
-        base.ReceiveDamage(damage);
-        // Implementação específica do recebimento de dano pelo Goblin
+        HealthPoints -= damage;
     }
 }

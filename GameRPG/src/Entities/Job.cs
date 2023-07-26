@@ -56,13 +56,14 @@ public class Warrior: IJob
 
     public int StrengthMultiplier()
     {
-        return Convert.ToInt32(_status.GetStrength() * _build.AttackPerStrength);
+        return Convert.ToInt32(_status.GetStrength() + _build.AttackPerStrength);
     }
 
     public void Attack(Monster monster)
     {
-        var damage = _weapon.CalculateDamage() * StrengthMultiplier();
+        var damage = _weapon.CalculateDamage() + StrengthMultiplier();
         monster.ReceiveDamage(damage);
+        Console.WriteLine($"The enemy receive {damage} damage");
     }
 
     public int GetIniciative()

@@ -22,5 +22,15 @@ namespace TreinarRPG.src.Entities
             _playerTurn = false;
             _monsterTurn = true;
         }
+
+        public static bool IsPlayerTurn()
+        {
+            return _playerTurn;
+        }
+
+        public static bool IsMonsterTurn()
+        {
+            return _monsterTurn;
+        }
     }
 }

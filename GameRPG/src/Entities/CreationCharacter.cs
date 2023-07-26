@@ -1,3 +1,5 @@
+using TreinarRPG.src.Entities;
+
 namespace GameRPG;
 
 public class CreationCharacter
@@ -11,10 +13,12 @@ public class CreationCharacter
         Console.WriteLine("Let's make create your character in a RPG game");
 
         Console.WriteLine();
-        Console.WriteLine("You are an adventurer in search of treasure and glory. " +
-            "One day, you hear rumors of a mysterious cave hidden in a nearby forest. " +
-            "They say that there is a valuable treasure hidden inside, but the cave is infested with dangerous monsters. " +
-            "You decide to venture into the cave to see if the rumors are true.");
+        Console.WriteLine("""
+            You are an adventurer in search of treasure and glory. 
+            One day, you hear rumors of a mysterious cave hidden in a nearby forest. 
+            They say that there is a valuable treasure hidden inside, but the cave is infested with dangerous monsters. 
+            You decide to venture into the cave to see if the rumors are true.
+            """);
         Console.WriteLine();
 
         Console.WriteLine("Your name: ");
