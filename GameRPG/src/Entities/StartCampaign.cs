@@ -19,6 +19,13 @@ public class StartCampaign
         Console.WriteLine("Entering in dungeon...");
         Thread.Sleep(3000);
         Console.Clear();
+        
+        Console.WriteLine("""
+                You enter the cave and begin to explore. 
+                Soon you come across a group of goblins, who are guarding the entrance to the treasure. 
+                You need to defeat them in order to pass."
+                """);
+        Console.WriteLine();
 
         MonsterCreator creator = new MonsterCreator();
 

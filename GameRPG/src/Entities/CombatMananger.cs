@@ -25,14 +25,7 @@ namespace TreinarRPG.src.Entities
         {
             _playerCharacter.SetHp();
             var iniciative = _job.Iniciative;
-
-            Console.WriteLine("""
-                You enter the cave and begin to explore. 
-                Soon you come across a group of goblins, who are guarding the entrance to the treasure. 
-                You need to defeat them in order to pass."
-                """);
-            Console.WriteLine();
-
+            
             Console.WriteLine($"{_monsters.Count} goblins appears!");
             Console.WriteLine();
 
