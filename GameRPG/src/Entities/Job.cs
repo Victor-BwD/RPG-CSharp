@@ -97,7 +97,7 @@ public class Mage: IJob
 
     public int StatusMultiplier()
     {
-        return Convert.ToInt32(_status.GetIntelligence() * _build.AttackPerIntelligence);
+        return Convert.ToInt32(_status.GetIntelligence() + _build.AttackPerIntelligence);
     }
 
     public int Dodge => 6;
@@ -106,7 +106,7 @@ public class Mage: IJob
 
     public void Attack(Monster monster)
     {
-        var damage = _weapon.CalculateDamage() * StatusMultiplier();
+        var damage = _weapon.CalculateDamage() + StatusMultiplier();
         monster.ReceiveDamage(damage);
     }
 
@@ -151,7 +151,7 @@ public class Rogue: IJob
 
     public int StatusMultiplier()
     {
-        return Convert.ToInt32(_status.GetIntelligence() * _build.AttackPerDex);
+        return Convert.ToInt32(_status.GetIntelligence() + _build.AttackPerDex);
     }
 
     public int Dodge => 8;
@@ -160,7 +160,7 @@ public class Rogue: IJob
 
     public void Attack(Monster monster)
     {
-        var damage = _weapon.CalculateDamage() * StatusMultiplier();
+        var damage = _weapon.CalculateDamage() + StatusMultiplier();
         monster.ReceiveDamage(damage);
     }
 
