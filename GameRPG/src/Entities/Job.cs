@@ -52,7 +52,7 @@ public class Warrior: IJob
     
     public string JobName => "Warrior";
 
-    public int Hp => 15;
+    public int Hp => 18;
 
     public int StrengthMultiplier()
     {
@@ -73,7 +73,7 @@ public class Warrior: IJob
         return _status.GetDexModifier() + d20;
     }
 
-    public int Dodge => 3;
+    public int Dodge => 5;
 
     public int Iniciative => GetIniciative();
 }
@@ -93,14 +93,14 @@ public class Mage: IJob
     }
     public string JobName => "Wizard";
 
-    public int Hp => 6;
+    public int Hp => 12;
 
     public int StatusMultiplier()
     {
         return Convert.ToInt32(_status.GetIntelligence() + _build.AttackPerIntelligence);
     }
 
-    public int Dodge => 6;
+    public int Dodge => 7;
 
     public int Iniciative => GetIniciative();
 
@@ -110,11 +110,11 @@ public class Mage: IJob
         monster.ReceiveDamage(damage);
     }
 
-    private readonly List<ISpell> _spells = new List<ISpell> { new Fireball(), new Lightning() };
+    public readonly List<ISpell> Spells = new List<ISpell> { new Fireball(), new Lightning() };
     
     public void CastSpell(string spellName, Monster monster)
     {
-        var spell = _spells.FirstOrDefault(x => x.Name.Equals(spellName, StringComparison.OrdinalIgnoreCase));
+        var spell = Spells.FirstOrDefault(x => x.Name.Equals(spellName, StringComparison.OrdinalIgnoreCase));
 
         if (spell == null)
         {
@@ -147,14 +147,14 @@ public class Rogue: IJob
     }
     public string JobName => "Rogue";
 
-    public int Hp => 8;
+    public int Hp => 15;
 
     public int StatusMultiplier()
     {
         return Convert.ToInt32(_status.GetIntelligence() + _build.AttackPerDex);
     }
 
-    public int Dodge => 8;
+    public int Dodge => 9;
 
     public int Iniciative => GetIniciative();
 
@@ -170,4 +170,9 @@ public class Rogue: IJob
         var d20 = rand.Next(1, 20);
         return _status.GetDexModifier() + d20;
     }
-}
+
+    private void Hide()
+    {
+        
+    }
+ }

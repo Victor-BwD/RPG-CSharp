@@ -4,27 +4,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TreinarRPG.Entities;
 
 namespace TreinarRPG.src.Entities
 {
     internal class CombatManager<T> where T : Monster
     {
         private PlayerCharacter _playerCharacter;
-        private List<T> _monsters;
-        private IJob _job;
-        private bool fightRunning = true; // Variável para controlar o estado do jogo
+        private List<Monster> _monsters;
+        private IJob _currentJob;
+        private bool _fightRunning = true; // Variável para controlar o estado do jogo
+        private int turnNumber;
 
-        public CombatManager(PlayerCharacter playerCharacter, List<T> monsters, IJob job)
+        public CombatManager(PlayerCharacter playerCharacter, List<Monster> monsters, IJob currentJob)
         {
             _playerCharacter = playerCharacter;
             _monsters = monsters;
-            _job = job;
+            _currentJob = currentJob;
         }
 
-        public void StartCombate()
+        public void StartCombat()
         {
             _playerCharacter.SetHp();
-            var iniciative = _job.Iniciative;
+            var iniciative = _currentJob.Iniciative;
             
             Console.WriteLine($"{_monsters.Count} goblins appears!");
             Console.WriteLine();
@@ -66,25 +68,34 @@ namespace TreinarRPG.src.Entities
         private void PlayerTurn()
         {
             TurnManager.SetPlayerTurn();
-            bool fightRunning = true;
 
-            while (fightRunning)
+            while (_fightRunning)
             {
                 Console.WriteLine("Player turn...");
                 Console.WriteLine();
 
-                for (int i = 0; i < _monsters.Count; i++)
+                foreach (var monster in _monsters)
                 {
-                    Console.WriteLine($"[{i + 1}] {_monsters[i].Name} (HP: {_monsters[i].HealthPoints})");
+                    Console.WriteLine($"[{_monsters.IndexOf(monster) + 1}] {monster.Name} (HP: {monster.HealthPoints})");
                 }
 
                 Console.Write("Choose the goblin to attack: ");
                 int selectedMonsterIndex = int.Parse(Console.ReadLine()) - 1;
+                
+                if (_playerCharacter.JobName == "Wizard")
+                {
+                    var mage = (Mage)_currentJob;
+                    Console.WriteLine("Choose your spell to cast: ");
+                    
+                    Monster selectedMonster = _monsters[selectedMonsterIndex];
+                    mage.CastSpell("Fireball", selectedMonster);
+                    Console.WriteLine(selectedMonster.HealthPoints);
+                }
 
                 if (selectedMonsterIndex >= 0 && selectedMonsterIndex < _monsters.Count)
                 {
                     Monster selectedMonster = _monsters[selectedMonsterIndex];
-                    _job.Attack(selectedMonster);
+                    _currentJob.Attack(selectedMonster);
                     Console.WriteLine(selectedMonster.HealthPoints);
 
                     VerifyEnemyHP();
@@ -99,7 +110,7 @@ namespace TreinarRPG.src.Entities
                 bool allMonsterDefeated = _monsters.All(m => m.HealthPoints <= 0);
                 if (allMonsterDefeated)
                 {
-                    fightRunning = false;
+                    _fightRunning = false;
                 }
             }
         }
@@ -120,7 +131,7 @@ namespace TreinarRPG.src.Entities
             if (_playerCharacter.ActualHp <= 0)
             {
                 Console.WriteLine("You have been defeated.");
-                fightRunning = false;
+                _fightRunning = false;
             }
 
             TurnManager.SetPlayerTurn();

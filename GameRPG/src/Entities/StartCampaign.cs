@@ -36,6 +36,6 @@ public class StartCampaign
         List<Monster> createdMonsters = creator.CreateMonster(monstersToCreate);
 
         CombatManager<Monster> combatManager = new CombatManager<Monster>(_playerCharacter, createdMonsters, _job);
-        combatManager.StartCombate();
+        combatManager.StartCombat();
     }
 }

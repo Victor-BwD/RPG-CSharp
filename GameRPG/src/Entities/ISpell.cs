@@ -14,7 +14,7 @@ public class Fireball : ISpell
         var rng = new Random().Next(1, 20);
         if (rng > monster.Dodge)
         {
-            var damage = new Random().Next(4, 8);
+            var damage = new Random().Next(16, 19);
             monster.ReceiveDamage(damage);
         }
         else
@@ -32,7 +32,7 @@ public class Lightning : ISpell
         var rng = new Random().Next(1, 20);
         if (rng > monster.Dodge)
         {
-            var damage = new Random().Next(2, 5);
+            var damage = new Random().Next(14, 18);
             monster.ReceiveDamage(damage);
         }
         else
