@@ -6,10 +6,9 @@ namespace TreinarRPG.Entities
 {
     internal class CombatManager<T> where T : Monster
     {
-        private PlayerCharacter _playerCharacter;
-        private List<Monster> _monsters;
-        private IJob _currentJob;
-        private bool _fightRunning = true; // Variável para controlar o estado do jogo
+        private readonly PlayerCharacter _playerCharacter;
+        private readonly List<Monster> _monsters;
+        private readonly IJob _currentJob;
 
         public CombatManager(PlayerCharacter playerCharacter, List<Monster> monsters, IJob currentJob)
         {
@@ -82,11 +81,7 @@ namespace TreinarRPG.Entities
                 }
             }
 
-            bool allMonsterDefeated = _monsters.TrueForAll(m => m.HealthPoints <= 0);
-            if (allMonsterDefeated)
-            {
-                _fightRunning = false;
-            }
+            
         }
 
         private int SelectedMonsterIndex()
@@ -121,7 +116,6 @@ namespace TreinarRPG.Entities
             if (_playerCharacter.ActualHp <= 0)
             {
                 Console.WriteLine("You have been defeated.");
-                _fightRunning = false;
             }
 
             PlayerTurn();
