@@ -26,7 +26,7 @@ public class Fireball : ISpell
 
 public class Lightning : ISpell
 {
-    public string Name { get; }
+    public string Name => "Lightning";
     public void Cast(Monster monster)
     {
         var rng = new Random().Next(1, 20);

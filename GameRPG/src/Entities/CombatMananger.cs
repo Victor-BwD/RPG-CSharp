@@ -74,18 +74,17 @@ namespace TreinarRPG.src.Entities
                 Console.WriteLine("Player turn...");
                 Console.WriteLine();
 
-                foreach (var monster in _monsters)
-                {
-                    Console.WriteLine($"[{_monsters.IndexOf(monster) + 1}] {monster.Name} (HP: {monster.HealthPoints})");
-                }
+                var selectedMonsterIndex = SelectedMonsterIndex();
 
-                Console.Write("Choose the goblin to attack: ");
-                int selectedMonsterIndex = int.Parse(Console.ReadLine()) - 1;
-                
                 if (_playerCharacter.JobName == "Wizard")
                 {
                     var mage = (Mage)_currentJob;
                     Console.WriteLine("Choose your spell to cast: ");
+
+                    foreach (var spell in mage.Spells)
+                    {
+                        Console.WriteLine($"[{mage.Spells.IndexOf(spell) + 1}] {spell.Name}");
+                    }
                     
                     Monster selectedMonster = _monsters[selectedMonsterIndex];
                     mage.CastSpell("Fireball", selectedMonster);
@@ -115,6 +114,18 @@ namespace TreinarRPG.src.Entities
             }
         }
 
+        private int SelectedMonsterIndex()
+        {
+            foreach (var monster in _monsters)
+            {
+                Console.WriteLine($"[{_monsters.IndexOf(monster) + 1}] {monster.Name} (HP: {monster.HealthPoints})");
+            }
+
+            Console.Write("Choose the goblin to attack: ");
+            int selectedMonsterIndex = int.Parse(Console.ReadLine()) - 1;
+            return selectedMonsterIndex;
+        }
+
         void MonsterTurn()
         {
             Console.WriteLine("Monster turn...");
@@ -138,6 +149,7 @@ namespace TreinarRPG.src.Entities
             PlayerTurn();
         }
 
+        
 
     }
 }
