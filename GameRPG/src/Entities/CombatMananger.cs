@@ -1,12 +1,8 @@
 ﻿using GameRPG;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TreinarRPG.Entities;
 
-namespace TreinarRPG.src.Entities
+namespace TreinarRPG.Entities
 {
     internal class CombatManager<T> where T : Monster
     {
@@ -14,7 +10,6 @@ namespace TreinarRPG.src.Entities
         private List<Monster> _monsters;
         private IJob _currentJob;
         private bool _fightRunning = true; // Variável para controlar o estado do jogo
-        private int turnNumber;
 
         public CombatManager(PlayerCharacter playerCharacter, List<Monster> monsters, IJob currentJob)
         {
@@ -27,111 +22,95 @@ namespace TreinarRPG.src.Entities
         {
             _playerCharacter.SetHp();
             var iniciative = _currentJob.Iniciative;
-            
+
             Console.WriteLine($"{_monsters.Count} goblins appears!");
             Console.WriteLine();
 
             if (iniciative > _monsters[0].Iniciative)
             {
-                TurnManager.SetPlayerTurn();
-                
                 PlayerTurn();
-
-
             }
             else
             {
-                TurnManager.SetMonsterTurn();
                 MonsterTurn();
             }
         }
 
         private void VerifyEnemyHP()
         {
-            foreach (var monster in _monsters)
-            {
-                if (monster.HealthPoints <= 0)
-                {
-                    _monsters.Remove(monster);
-                    break;
-                }
-            }
+            _monsters.RemoveAll(monster => monster.HealthPoints <= 0);
         }
 
         private bool IsEnemyListIsEmpty()
         {
-            if (_monsters.Count <= 0) return true;
-
-            return false;
+            return _monsters.Count == 0;
         }
 
         private void PlayerTurn()
         {
-            TurnManager.SetPlayerTurn();
+            Console.WriteLine("Player turn...");
+            Console.WriteLine();
 
-            while (_fightRunning)
+            var selectedMonsterIndex = SelectedMonsterIndex();
+
+            if (_playerCharacter.JobName == "Wizard")
             {
-                Console.WriteLine("Player turn...");
-                Console.WriteLine();
+                var mage = (Mage)_currentJob;
+                Console.WriteLine("Choose your spell to cast: ");
 
-                var selectedMonsterIndex = SelectedMonsterIndex();
-
-                if (_playerCharacter.JobName == "Wizard")
+                foreach (var spell in mage.Spells)
                 {
-                    var mage = (Mage)_currentJob;
-                    Console.WriteLine("Choose your spell to cast: ");
-
-                    foreach (var spell in mage.Spells)
-                    {
-                        Console.WriteLine($"[{mage.Spells.IndexOf(spell) + 1}] {spell.Name}");
-                    }
-                    
-                    Monster selectedMonster = _monsters[selectedMonsterIndex];
-                    mage.CastSpell("Fireball", selectedMonster);
-                    Console.WriteLine(selectedMonster.HealthPoints);
+                    Console.WriteLine($"[{mage.Spells.IndexOf(spell) + 1}] {spell.Name}");
                 }
 
-                if (selectedMonsterIndex >= 0 && selectedMonsterIndex < _monsters.Count)
+                Monster selectedMonster = _monsters[selectedMonsterIndex];
+                mage.CastSpell("Fireball", selectedMonster);
+                Console.WriteLine(selectedMonster.HealthPoints);
+            }
+
+            if (selectedMonsterIndex >= 0 && selectedMonsterIndex < _monsters.Count)
+            {
+                Monster selectedMonster = _monsters[selectedMonsterIndex];
+                _currentJob.Attack(selectedMonster);
+                Console.WriteLine(selectedMonster.HealthPoints);
+
+                VerifyEnemyHP();
+
+                if (!IsEnemyListIsEmpty())
                 {
-                    Monster selectedMonster = _monsters[selectedMonsterIndex];
-                    _currentJob.Attack(selectedMonster);
-                    Console.WriteLine(selectedMonster.HealthPoints);
-
-                    VerifyEnemyHP();
-                    TurnManager.SetMonsterTurn();
-
-                    if (!IsEnemyListIsEmpty() && TurnManager.IsMonsterTurn())
-                    {
-                        MonsterTurn();
-                    }
+                    MonsterTurn();
                 }
+            }
 
-                bool allMonsterDefeated = _monsters.All(m => m.HealthPoints <= 0);
-                if (allMonsterDefeated)
-                {
-                    _fightRunning = false;
-                }
+            bool allMonsterDefeated = _monsters.TrueForAll(m => m.HealthPoints <= 0);
+            if (allMonsterDefeated)
+            {
+                _fightRunning = false;
             }
         }
 
         private int SelectedMonsterIndex()
         {
-            foreach (var monster in _monsters)
+            for (int i = 0; i < _monsters.Count; i++)
             {
-                Console.WriteLine($"[{_monsters.IndexOf(monster) + 1}] {monster.Name} (HP: {monster.HealthPoints})");
+                var monster = _monsters[i];
+                Console.WriteLine($"[{i + 1}] {monster.Name} (HP: {monster.HealthPoints})");
             }
 
             Console.Write("Choose the goblin to attack: ");
-            int selectedMonsterIndex = int.Parse(Console.ReadLine()) - 1;
-            return selectedMonsterIndex;
+            int selectedMonsterIndex;
+            while (!int.TryParse(Console.ReadLine(), out selectedMonsterIndex) || selectedMonsterIndex < 1 || selectedMonsterIndex > _monsters.Count)
+            {
+                Console.Write("Invalid input. Choose the monster to attack: ");
+            }
+
+            return selectedMonsterIndex - 1;
         }
 
-        void MonsterTurn()
+        private void MonsterTurn()
         {
             Console.WriteLine("Monster turn...");
             Console.WriteLine();
-
-            
 
             foreach (Monster monster in _monsters)
             {
@@ -145,11 +124,7 @@ namespace TreinarRPG.src.Entities
                 _fightRunning = false;
             }
 
-            TurnManager.SetPlayerTurn();
             PlayerTurn();
         }
-
-        
-
     }
 }
