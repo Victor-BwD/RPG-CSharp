@@ -107,6 +107,7 @@ public class Mage: IJob
     public void Attack(Monster monster)
     {
         var damage = _weapon.CalculateDamage() + StatusMultiplier();
+        Console.WriteLine($"You attacked with your weapon and cause {damage}");
         monster.ReceiveDamage(damage);
     }
 

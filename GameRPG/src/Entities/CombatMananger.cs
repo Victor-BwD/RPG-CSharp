@@ -1,6 +1,7 @@
 ﻿using GameRPG;
 using System;
 using System.Collections.Generic;
+using System.Threading.Channels;
 
 namespace TreinarRPG.Entities
 {
@@ -56,14 +57,28 @@ namespace TreinarRPG.Entities
             {
                 var mage = (Mage)_currentJob;
                 Console.WriteLine("Choose your spell to cast: ");
-
+                Console.WriteLine("Choose zero to melee attack...");
+                
                 foreach (var spell in mage.Spells)
                 {
                     Console.WriteLine($"[{mage.Spells.IndexOf(spell) + 1}] {spell.Name}");
                 }
 
+                int spellIndex;
+
+                while (!int.TryParse(Console.ReadLine(), out spellIndex) || spellIndex < 0 ||
+                    spellIndex > mage.Spells.Count)
+                {
+                    Console.WriteLine("Invalid spell, choose a spell to attack: ");
+                    
+                    if (spellIndex == 0)
+                    {
+                        mage.Attack(_monsters[selectedMonsterIndex]);
+                    }
+                }
+
                 Monster selectedMonster = _monsters[selectedMonsterIndex];
-                mage.CastSpell("Fireball", selectedMonster);
+                mage.CastSpell(mage.Spells[spellIndex].Name, selectedMonster);
                 Console.WriteLine(selectedMonster.HealthPoints);
             }
 
@@ -92,7 +107,7 @@ namespace TreinarRPG.Entities
                 Console.WriteLine($"[{i + 1}] {monster.Name} (HP: {monster.HealthPoints})");
             }
 
-            Console.Write("Choose the goblin to attack: ");
+            Console.Write("Choose the monster to attack: ");
             int selectedMonsterIndex;
             while (!int.TryParse(Console.ReadLine(), out selectedMonsterIndex) || selectedMonsterIndex < 1 || selectedMonsterIndex > _monsters.Count)
             {
