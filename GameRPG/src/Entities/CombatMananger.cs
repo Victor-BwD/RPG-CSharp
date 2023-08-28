@@ -1,7 +1,4 @@
 ﻿using GameRPG;
-using System;
-using System.Collections.Generic;
-using System.Threading.Channels;
 
 namespace TreinarRPG.Entities
 {
@@ -57,7 +54,7 @@ namespace TreinarRPG.Entities
             {
                 var mage = (Mage)_currentJob;
                 Console.WriteLine("Choose your spell to cast: ");
-                Console.WriteLine("Choose zero to melee attack...");
+              
                 
                 foreach (var spell in mage.Spells)
                 {
@@ -70,33 +67,37 @@ namespace TreinarRPG.Entities
                     spellIndex > mage.Spells.Count)
                 {
                     Console.WriteLine("Invalid spell, choose a spell to attack: ");
-                    
-                    if (spellIndex == 0)
-                    {
-                        mage.Attack(_monsters[selectedMonsterIndex]);
-                    }
                 }
-
+                spellIndex--;
+                
+                
                 Monster selectedMonster = _monsters[selectedMonsterIndex];
                 mage.CastSpell(mage.Spells[spellIndex].Name, selectedMonster);
                 Console.WriteLine(selectedMonster.HealthPoints);
+                
+                PerformMonsterRound();
             }
-
-            if (selectedMonsterIndex >= 0 && selectedMonsterIndex < _monsters.Count)
+            else
             {
-                Monster selectedMonster = _monsters[selectedMonsterIndex];
-                _currentJob.Attack(selectedMonster);
-                Console.WriteLine(selectedMonster.HealthPoints);
-
-                VerifyEnemyHP();
-
-                if (!IsEnemyListIsEmpty())
+                if (selectedMonsterIndex >= 0 && selectedMonsterIndex < _monsters.Count)
                 {
-                    MonsterTurn();
+                    Monster selectedMonster = _monsters[selectedMonsterIndex];
+                    _currentJob.Attack(selectedMonster);
+                    Console.WriteLine(selectedMonster.HealthPoints);
+
+                    PerformMonsterRound();
                 }
             }
+        }
 
-            
+        private void PerformMonsterRound()
+        {
+            VerifyEnemyHP();
+
+            if (!IsEnemyListIsEmpty())
+            {
+                MonsterTurn();
+            }
         }
 
         private int SelectedMonsterIndex()

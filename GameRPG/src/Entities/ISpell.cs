@@ -15,6 +15,7 @@ public class Fireball : ISpell
         if (rng > monster.Dodge)
         {
             var damage = new Random().Next(16, 19);
+            Console.WriteLine($"You attack with {Name} and cause {damage} of damage");
             monster.ReceiveDamage(damage);
         }
         else
@@ -33,6 +34,7 @@ public class Lightning : ISpell
         if (rng > monster.Dodge)
         {
             var damage = new Random().Next(14, 18);
+            Console.WriteLine($"You attack with {Name} and cause {damage} of damage");
             monster.ReceiveDamage(damage);
         }
         else
