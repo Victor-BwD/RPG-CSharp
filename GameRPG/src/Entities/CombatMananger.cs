@@ -52,30 +52,7 @@ namespace TreinarRPG.Entities
 
             if (_playerCharacter.JobName == "Wizard")
             {
-                var mage = (Mage)_currentJob;
-                Console.WriteLine("Choose your spell to cast: ");
-              
-                
-                foreach (var spell in mage.Spells)
-                {
-                    Console.WriteLine($"[{mage.Spells.IndexOf(spell) + 1}] {spell.Name}");
-                }
-
-                int spellIndex;
-
-                while (!int.TryParse(Console.ReadLine(), out spellIndex) || spellIndex < 0 ||
-                    spellIndex > mage.Spells.Count)
-                {
-                    Console.WriteLine("Invalid spell, choose a spell to attack: ");
-                }
-                spellIndex--;
-                
-                
-                Monster selectedMonster = _monsters[selectedMonsterIndex];
-                mage.CastSpell(mage.Spells[spellIndex].Name, selectedMonster);
-                Console.WriteLine(selectedMonster.HealthPoints);
-                
-                PerformMonsterRound();
+                ExecuteMageSpellSelectionAndCast(selectedMonsterIndex);
             }
             else
             {
@@ -90,6 +67,40 @@ namespace TreinarRPG.Entities
             }
         }
 
+        private void ExecuteMageSpellSelectionAndCast(int selectedMonsterIndex)
+        {
+            var mage = (Mage)_currentJob;
+            Console.WriteLine("Choose your spell to cast: ");
+
+
+            DisplayMageSpells(mage);
+
+            int spellIndex;
+
+            while (!int.TryParse(Console.ReadLine(), out spellIndex) || spellIndex < 0 ||
+                   spellIndex > mage.Spells.Count)
+            {
+                Console.WriteLine("Invalid spell, choose a spell to attack: ");
+            }
+
+            spellIndex--;
+
+
+            Monster selectedMonster = _monsters[selectedMonsterIndex];
+            mage.CastSpell(mage.Spells[spellIndex].Name, selectedMonster);
+            Console.WriteLine(selectedMonster.HealthPoints);
+
+            PerformMonsterRound();
+        }
+
+        private static void DisplayMageSpells(Mage mage)
+        {
+            foreach (var spell in mage.Spells)
+            {
+                Console.WriteLine($"[{mage.Spells.IndexOf(spell) + 1}] {spell.Name}");
+            }
+        }
+
         private void PerformMonsterRound()
         {
             VerifyEnemyHP();
@@ -97,6 +108,10 @@ namespace TreinarRPG.Entities
             if (!IsEnemyListIsEmpty())
             {
                 MonsterTurn();
+            }
+            else
+            {
+                Console.WriteLine("You have defeated all the monsters!");
             }
         }
 
