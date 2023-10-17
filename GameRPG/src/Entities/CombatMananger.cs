@@ -1,4 +1,5 @@
 ﻿using GameRPG;
+using TreinarRPG.src.Entities;
 
 namespace TreinarRPG.Entities
 {
@@ -112,6 +113,8 @@ namespace TreinarRPG.Entities
             else
             {
                 Console.WriteLine("You have defeated all the monsters!");
+                var continueCampaign = new StartCampaign(_playerCharacter, _currentJob, new CampaignStory());
+                continueCampaign.ContinueCampaign();
             }
         }
 

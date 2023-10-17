@@ -7,11 +7,24 @@ public class StartCampaign
 {
     private PlayerCharacter _playerCharacter;
     private IJob _job;
+    private CampaignStory _campaignStory;
 
+    public StartCampaign(PlayerCharacter playerCharacter, IJob job, CampaignStory campaignStory)
+    {
+        _playerCharacter = playerCharacter;
+        _job = job;
+        _campaignStory = campaignStory;
+    }
+    
     public StartCampaign(PlayerCharacter playerCharacter, IJob job)
     {
         _playerCharacter = playerCharacter;
         _job = job;
+    }
+
+    public StartCampaign()
+    {
+        
     }
 
     public void StartGame()
@@ -37,5 +50,11 @@ public class StartCampaign
 
         CombatManager<Monster> combatManager = new CombatManager<Monster>(_playerCharacter, createdMonsters, _job);
         combatManager.StartCombat();
+    }
+
+    public void ContinueCampaign()
+    {
+        Console.WriteLine(_playerCharacter.ActualHp);
+        _campaignStory.AdvanceStory();
     }
 }
