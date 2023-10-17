@@ -147,6 +147,7 @@ namespace TreinarRPG.Entities
             if (_playerCharacter.ActualHp <= 0)
             {
                 Console.WriteLine("You have been defeated.");
+                return;
             }
 
             PlayerTurn();
