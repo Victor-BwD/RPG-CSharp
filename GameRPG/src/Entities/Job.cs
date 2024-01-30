@@ -108,7 +108,7 @@ public class Mage: IJob
     public void Attack(Monster monster)
     {
         var damage = _weapon.CalculateDamage() + StatusMultiplier();
-        Console.WriteLine($"You attacked with your weapon and cause {damage}");
+        Console.WriteLine($"You attacked with your {_weapon.Name} and cause {damage}");
         monster.ReceiveDamage(damage);
     }
 
@@ -163,6 +163,7 @@ public class Rogue: IJob
     public void Attack(Monster monster)
     {
         var damage = _weapon.CalculateDamage() + StatusMultiplier();
+        Console.WriteLine($"You attacked with your {_weapon.Name} and cause {damage}");
         monster.ReceiveDamage(damage);
     }
 
