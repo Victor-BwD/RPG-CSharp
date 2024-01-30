@@ -63,6 +63,7 @@ public class Warrior: IJob
     {
         var damage = _weapon.CalculateDamage() + StrengthMultiplier();
         monster.ReceiveDamage(damage);
+        Console.WriteLine($"You attack with your {_weapon.Name}");
         Console.WriteLine($"The enemy receive {damage} damage");
     }
 
