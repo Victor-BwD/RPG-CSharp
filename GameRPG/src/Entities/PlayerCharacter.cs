@@ -28,7 +28,11 @@ public class PlayerCharacter
        
         set => ActualHp = value;
     }
-    public int Dodge => _job.Dodge;
+    public int Dodge
+    {
+        get => _job.Dodge;
+        set => Dodge = value;
+    }
 
     public string DisplayCharacterInfo()
     {
@@ -75,5 +79,10 @@ public class PlayerCharacter
     public void SetHp()
     {
         ActualHp = Hp;
+    }
+    
+    public int IncreaseDodge(int amount)
+    {
+        return Dodge += amount;
     }
 }

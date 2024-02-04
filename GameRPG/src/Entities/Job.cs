@@ -19,7 +19,7 @@ public interface IJob
                 AttackPerStrength = 2.0f,
                 AttackPerDex = 1.5f,
                 AttackPerIntelligence = 1.0f
-            }, new Sword("Long Sword", 3, 6)),
+            }, new Sword("Long Sword", 6, 10)),
             "mage" => new Mage(status, new Build()
             {
                 AttackPerStrength = 1.0f,
@@ -31,7 +31,7 @@ public interface IJob
                 AttackPerStrength = 1.5f,
                 AttackPerDex = 2.0f,
                 AttackPerIntelligence = 1.0f
-            }, new Dagger("Simple Dagger", 2, 4)),
+            }, new Dagger("Simple Dagger", 4, 8)),
             _ => null
         };
     }
@@ -156,7 +156,7 @@ public class Rogue: IJob
         return Convert.ToInt32(_status.GetIntelligence() + _build.AttackPerDex);
     }
 
-    public int Dodge => 9;
+    public int Dodge => 12;
 
     public int Iniciative => GetIniciative();
 
