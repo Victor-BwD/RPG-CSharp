@@ -38,6 +38,7 @@ public class StartCampaign
                 Soon you come across a group of goblins, who are guarding the entrance to the treasure. 
                 You need to defeat them in order to pass."
                 """);
+        Thread.Sleep(3000);
         Console.WriteLine();
 
         MonsterCreator creator = new MonsterCreator();

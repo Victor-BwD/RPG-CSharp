@@ -13,6 +13,7 @@ public class CreationCharacter
         Console.WriteLine("Let's make create your character in a RPG game");
 
         Console.WriteLine();
+        Thread.Sleep(1000);
         Console.WriteLine("""
             You are an adventurer in search of treasure and glory. 
             One day, you hear rumors of a mysterious cave hidden in a nearby forest. 
@@ -20,6 +21,8 @@ public class CreationCharacter
             You decide to venture into the cave to see if the rumors are true.
             """);
         Console.WriteLine();
+        Thread.Sleep(1000);
+
 
         Console.WriteLine("Your name: ");
         var name = Console.ReadLine().Trim();
@@ -109,6 +112,7 @@ public class CreationCharacter
     private void ClassChoosed(IJob job)
     {
         Console.WriteLine($"You are a {job.JobName}, with {job.Hp} Max Hp and you capacity to dodge attack is {job.Dodge}");
+        Thread.Sleep(2000);
     }
 
     private void ShowValidStats()
