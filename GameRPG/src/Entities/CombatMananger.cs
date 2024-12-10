@@ -8,6 +8,7 @@ namespace TreinarRPG.Entities
         private readonly PlayerCharacter _playerCharacter;
         private readonly List<Monster> _monsters;
         private readonly IJob _currentJob;
+        private List<Monster> _monstersCopy;
 
         public CombatManager(PlayerCharacter playerCharacter, List<Monster> monsters, IJob currentJob)
         {
@@ -20,6 +21,7 @@ namespace TreinarRPG.Entities
         {
             _playerCharacter.SetHp();
             var iniciative = _currentJob.Iniciative;
+            _monstersCopy = new List<Monster>(_monsters);
 
             Console.WriteLine($"{_monsters.Count} goblins appears!");
             Console.WriteLine();
@@ -112,8 +114,16 @@ namespace TreinarRPG.Entities
             }
             else
             {
-                Console.WriteLine("You have defeated all the monsters!");
-                var continueCampaign = new StartCampaign(_playerCharacter, _currentJob, new CampaignStory());
+                int totalXP = _monstersCopy.Sum(monster => monster.XPReward);
+                Console.WriteLine($"You have defeated all the monsters! You receive ${totalXP} xp");
+                var continueCampaign = new StartCampaign(_playerCharacter, _currentJob, new CampaignControl());
+               
+                
+                    _playerCharacter.IncreaseXP(totalXP);
+                    
+             
+             
+                _monstersCopy.Clear();
                 continueCampaign.ContinueCampaign();
             }
         }

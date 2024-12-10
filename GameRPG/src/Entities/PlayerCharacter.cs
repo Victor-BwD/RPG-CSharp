@@ -62,6 +62,7 @@ public class PlayerCharacter
         _xp += xp;
         if (_level == 1 && _xp >= 200)
         {
+            Console.WriteLine("You leveled up!");
             SetLevel(2);
         }
 

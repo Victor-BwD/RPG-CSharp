@@ -7,15 +7,15 @@ public class StartCampaign
 {
     private PlayerCharacter _playerCharacter;
     private IJob _job;
-    private CampaignStory _campaignStory;
+    private CampaignControl _campaignControl;
 
-    public StartCampaign(PlayerCharacter playerCharacter, IJob job, CampaignStory campaignStory)
+    public StartCampaign(PlayerCharacter playerCharacter, IJob job, CampaignControl campaignControl)
     {
         _playerCharacter = playerCharacter;
         _job = job;
-        _campaignStory = campaignStory;
+        _campaignControl = campaignControl;
     }
-    
+
     public StartCampaign(PlayerCharacter playerCharacter, IJob job)
     {
         _playerCharacter = playerCharacter;
@@ -24,7 +24,7 @@ public class StartCampaign
 
     public StartCampaign()
     {
-        
+
     }
 
     public void StartGame()
@@ -32,7 +32,7 @@ public class StartCampaign
         Console.WriteLine("Entering in dungeon...");
         Thread.Sleep(3000);
         Console.Clear();
-        
+
         Console.WriteLine("""
                 You enter the cave and begin to explore. 
                 Soon you come across a group of goblins, who are guarding the entrance to the treasure. 
@@ -56,6 +56,18 @@ public class StartCampaign
     public void ContinueCampaign()
     {
         Console.WriteLine(_playerCharacter.ActualHp);
-        _campaignStory.AdvanceStory();
+        _campaignControl.AdvanceStory();
+        NextStage();
+    }
+
+    public void NextStage()
+    {
+        if (_campaignControl.GetStoryProgress() == 1)
+        {
+            Console.WriteLine("You defeated the goblins and now you can continue your journey.");
+            Thread.Sleep(3000);
+            Console.Clear();
+            
+        }
     }
 }

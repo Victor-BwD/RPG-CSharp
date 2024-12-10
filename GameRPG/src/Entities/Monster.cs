@@ -9,14 +9,16 @@ public abstract class Monster
     
     public int Dodge { get; protected set; }
     public int Iniciative { get; protected set; }
+    public int XPReward { get; protected set; }
 
-    public Monster(string name, int level, int healthPoints, int attackPower, int dodge)
+    public Monster(string name, int level, int healthPoints, int attackPower, int dodge, int xpReward)
     {
         Name = name;
         Level = level;
         HealthPoints = healthPoints;
         AttackPower = attackPower;
         Dodge = dodge;
+        XPReward = xpReward;
     }
     
     public virtual void Attack(PlayerCharacter player)
@@ -35,7 +37,7 @@ public class Goblin : Monster
     public int PowerAttack { get; protected set; }
     public int Damage { get; protected set; }
 
-    public Goblin() : base("Goblin", 1, 50, 2, 3)
+    public Goblin() : base("Goblin", 1, 50, 2, 3, 50)
     {
         PowerAttack = 2;
         Iniciative = 4;
@@ -67,7 +69,7 @@ public class Minotaur : Monster
     public int PowerAttack { get; protected set; }
     public int Damage { get; protected set; }
     
-    public Minotaur() : base("Minotaur", 2, 150, 4, 4)
+    public Minotaur() : base("Minotaur", 2, 150, 4, 4, 150)
     {
         PowerAttack = 4;
         Iniciative = 5;
@@ -91,7 +93,7 @@ public class Vampire : Monster
     public int PowerAttack { get; protected set; }
     public int Damage { get; protected set; }
     
-    public Vampire() : base("Vampire", 3, 250, 5, 7)
+    public Vampire() : base("Vampire", 3, 250, 5, 7, 300)
     {
         PowerAttack = 5;
         Iniciative = 7;
