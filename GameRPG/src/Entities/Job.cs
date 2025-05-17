@@ -52,7 +52,7 @@ public class Warrior: IJob
     
     public string JobName => "Warrior";
 
-    public int Hp => 18;
+    public int Hp => 42;
 
     public int StrengthMultiplier()
     {
@@ -70,7 +70,7 @@ public class Warrior: IJob
     public int GetIniciative()
     {
         var rand = new Random();
-        var d20 = rand.Next(1, 20);
+        var d20 = rand.Next(1, 21);
         return _status.GetDexModifier() + d20;
     }
 
@@ -94,7 +94,7 @@ public class Mage: IJob
     }
     public string JobName => "Wizard";
 
-    public int Hp => 12;
+    public int Hp => 26;
 
     public int StatusMultiplier()
     {
@@ -149,7 +149,7 @@ public class Rogue: IJob
     }
     public string JobName => "Rogue";
 
-    public int Hp => 15;
+    public int Hp => 32;
 
     public int StatusMultiplier()
     {

@@ -45,15 +45,15 @@ public class Goblin : Monster
     
     public override void Attack(PlayerCharacter player)
     {
-        var attackHit = new Random().Next(1, 20);
-        if (attackHit > player.Dodge)
+        var attackRoll = new Random().Next(1, 21);
+        if (attackRoll <= player.Dodge)
         {
             Console.WriteLine("You dodge the attack.");
             return;
         }
 
-        Damage = new Random().Next(1, 2) + PowerAttack;
-        player.ActualHp -= Damage;
+        Damage = new Random().Next(1, 3) + PowerAttack;
+        player.TakeDamage(Damage);
         Console.WriteLine("You failed to dodge the enemy's attack.");
         Console.WriteLine($"{player.PlayerName} lost {Damage} health points");
     }
@@ -101,15 +101,15 @@ public class Vampire : Monster
     
     public override void Attack(PlayerCharacter player)
     {
-        var attackHit = new Random().Next(1, 20);
-        if (attackHit > player.Dodge)
+        var attackRoll = new Random().Next(1, 21); 
+        if (attackRoll <= player.Dodge)
         {
             Console.WriteLine("You dodge the attack.");
             return;
         }
 
-        Damage = new Random().Next(1, 2) + PowerAttack;
-        player.ActualHp -= Damage;
+        Damage = new Random().Next(1, 5) + PowerAttack;
+        player.TakeDamage(Damage);
         Console.WriteLine("You failed to dodge the enemy's attack.");
         Console.WriteLine($"{player.PlayerName} lost {Damage} health points");
     }

@@ -6,6 +6,8 @@ public class PlayerCharacter
     private Status _stats;
     private int _xp;
     private readonly IJob _job;
+    private int _dodge;
+
 
     private static int _level;
     
@@ -14,6 +16,7 @@ public class PlayerCharacter
         _name = name;
         _stats = stats;
         _job = job;
+        _dodge = job.Dodge;
     }
 
     public int ActualHp;
@@ -30,8 +33,9 @@ public class PlayerCharacter
     }
     public int Dodge
     {
-        get => _job.Dodge;
-        set => Dodge = value;
+        get => _dodge;
+        set => _dodge = value;
+   
     }
 
     public string DisplayCharacterInfo()
@@ -85,5 +89,12 @@ public class PlayerCharacter
     public int IncreaseDodge(int amount)
     {
         return Dodge += amount;
+    }
+
+    public void TakeDamage(int amount)
+    {
+        ActualHp -= amount;
+        if (ActualHp < 0)
+            ActualHp = 0;
     }
 }
