@@ -26,11 +26,14 @@ public class CreationCharacter
 
         Console.WriteLine("Your name: ");
         var name = Console.ReadLine().Trim();
-        while (string.Equals(name, ""))
+        do
         {
+            Console.WriteLine("Your name: ");
+            name = Console.ReadLine().Trim();
+
+            if (string.IsNullOrEmpty(name))
             Console.WriteLine("Is not possible create a character with no name...");
-            CreateCharacter();
-        }
+        } while (string.IsNullOrEmpty(name));
 
         var status = new Status();
 
