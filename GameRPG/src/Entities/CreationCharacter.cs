@@ -25,7 +25,7 @@ public class CreationCharacter
 
 
         Console.WriteLine("Your name: ");
-        var name = Console.ReadLine().Trim();
+        string name;
         do
         {
             Console.WriteLine("Your name: ");
