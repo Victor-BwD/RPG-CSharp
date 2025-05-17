@@ -23,8 +23,6 @@ public class CreationCharacter
         Console.WriteLine();
         Thread.Sleep(1000);
 
-
-        Console.WriteLine("Your name: ");
         string name;
         do
         {
@@ -60,7 +58,7 @@ public class CreationCharacter
             Console.WriteLine("Choose between Warrior, Mage or Rogue: ");
             input = Console.ReadLine().ToLower().Trim();
             
-            while (!_jobs.Contains(input)) // Não contém
+            while (!_jobs.Contains(input))
             {
                 Console.WriteLine("Choose between Warrior, Mage or Rogue: ");
                 input = Console.ReadLine().ToLower().Trim();
@@ -73,43 +71,34 @@ public class CreationCharacter
 
         return job;
     }
-    
+
+    private int GetValidStat(string attributeName)
+    {
+        int value;
+        do
+        {
+            Console.Write($"{attributeName}: ");
+            if (int.TryParse(Console.ReadLine(), out value) && _statsNumbers.Contains(value))
+            {
+                _statsNumbers.Remove(value);
+                return value;
+            }
+
+            Console.WriteLine("Invalid stat. Try again.");
+        } while (true);
+    }
+
     private void DistributeStatus(Status status)
     {
         ShowValidStats();
 
-        do
-        {
-            Console.Write("Strength: ");
-            status.SetStrength(int.Parse(Console.ReadLine()));
-        } while (!_statsNumbers.Contains(status.GetStrength()));
+        status.SetStrength(GetValidStat("Strength"));
+        status.SetDexterity(GetValidStat("Dexterity"));
+        status.SetIntelligence(GetValidStat("Intelligence"));     
+        status.SetCharisma(GetValidStat("Charisma"));
 
-        _statsNumbers.Remove(status.GetStrength());
-        ShowValidStats();
-
-        do
-        {
-            Console.Write("Dexterity: ");
-            status.SetDexterity(int.Parse(Console.ReadLine()));
-        } while (!_statsNumbers.Contains(status.GetDex()));
-
-        _statsNumbers.Remove(status.GetDex());
-        ShowValidStats();
-
-        do
-        {
-            Console.Write("Intelligence: ");
-            status.SetIntelligence(int.Parse(Console.ReadLine()));
-        } while (!_statsNumbers.Contains(status.GetIntelligence()));
-        
         _statsNumbers.Remove(status.GetIntelligence());
         ShowValidStats();
-
-        do
-        {
-            Console.Write("Charisma: ");
-            status.SetCharisma(int.Parse(Console.ReadLine()));
-        } while (!_statsNumbers.Contains(status.GetCharisma()));
     }
 
     private void ClassChoosed(IJob job)
