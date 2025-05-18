@@ -19,6 +19,12 @@ namespace TreinarRPG.Entities
 
         public void StartCombat()
         {
+            if (_monsters.Count == 0)
+            {
+                Console.WriteLine("No monsters to fight!");
+                return;
+            }
+
             _playerCharacter.SetHp();
             var iniciative = _currentJob.Iniciative;
             _monstersCopy = new List<Monster>(_monsters);

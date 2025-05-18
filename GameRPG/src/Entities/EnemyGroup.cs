@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TreinarRPG
 {
-    public class EnemyGroup
+    public record EnemyGroup
     {
         public List<Monster> Monsters { get; set; }
 

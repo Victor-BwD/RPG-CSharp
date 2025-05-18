@@ -8,13 +8,15 @@ public interface ISpell
 
 public class Fireball : ISpell
 {
+    private static readonly Random _rng = new();
     public string Name => "Fireball";
+
     public void Cast(Monster monster)
     {
-        var rng = new Random().Next(1, 20);
-        if (rng > monster.Dodge)
+        var roll = _rng.Next(1, 21);
+        if (roll > monster.Dodge)
         {
-            var damage = new Random().Next(16, 19);
+            var damage = _rng.Next(16, 20);
             Console.WriteLine($"You attack with {Name} and cause {damage} of damage");
             monster.ReceiveDamage(damage);
         }
@@ -27,13 +29,15 @@ public class Fireball : ISpell
 
 public class Lightning : ISpell
 {
+    private static readonly Random _rng = new();
     public string Name => "Lightning";
+
     public void Cast(Monster monster)
     {
-        var rng = new Random().Next(1, 20);
-        if (rng > monster.Dodge)
+        var roll = _rng.Next(1, 21);
+        if (roll > monster.Dodge)
         {
-            var damage = new Random().Next(14, 18);
+            var damage = _rng.Next(14, 18);
             Console.WriteLine($"You attack with {Name} and cause {damage} of damage");
             monster.ReceiveDamage(damage);
         }

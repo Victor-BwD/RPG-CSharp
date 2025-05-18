@@ -52,7 +52,7 @@ public class Goblin : Monster
             return;
         }
 
-        Damage = new Random().Next(1, 3) + PowerAttack;
+        Damage = new Random().Next(1, 2) + PowerAttack;
         player.TakeDamage(Damage);
         Console.WriteLine("You failed to dodge the enemy's attack.");
         Console.WriteLine($"{player.PlayerName} lost {Damage} health points");
@@ -108,8 +108,8 @@ public class Vampire : Monster
             return;
         }
 
-        Damage = new Random().Next(1, 5) + PowerAttack;
-        player.TakeDamage(Damage);
+        Damage = new Random().Next(1, 2) + PowerAttack;
+        player.ActualHp -= Damage;
         Console.WriteLine("You failed to dodge the enemy's attack.");
         Console.WriteLine($"{player.PlayerName} lost {Damage} health points");
     }
