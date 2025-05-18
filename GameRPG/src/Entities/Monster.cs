@@ -68,6 +68,7 @@ public class Goblin : Monster
 
 public class Minotaur : Monster
 {
+    private static readonly Random _rng = new();
     public int PowerAttack { get; protected set; }
     public int Damage { get; protected set; }
     
@@ -79,14 +80,22 @@ public class Minotaur : Monster
     
     public override void Attack(PlayerCharacter player)
     {
-        base.Attack(player);
-        // Implementação específica do ataque do Goblin ao jogador
+        var attackRoll = _rng.Next(1, 21);
+        if (attackRoll <= player.Dodge)
+        {
+            Console.WriteLine("You dodge the attack.");
+            return;
+        }
+
+        Damage = _rng.Next(1, 3) + PowerAttack;
+        player.TakeDamage(Damage);
+        Console.WriteLine("You failed to dodge the enemy's attack.");
+        Console.WriteLine($"{player.PlayerName} lost {Damage} health points");
     }
     
     public override void ReceiveDamage(int damage)
     {
-        base.ReceiveDamage(damage);
-        // Implementação específica do recebimento de dano pelo Goblin
+        HealthPoints -= damage;
     }
 }
 
