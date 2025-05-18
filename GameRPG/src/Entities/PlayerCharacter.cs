@@ -8,6 +8,7 @@ public class PlayerCharacter
     private readonly IJob _job;
     private int _dodge;
 
+    public int MaxHp { get; private set; }
 
     private static int _level;
     
@@ -17,6 +18,7 @@ public class PlayerCharacter
         _stats = stats;
         _job = job;
         _dodge = job.Dodge;
+        MaxHp = job.Hp;
     }
 
     public int ActualHp;
@@ -24,13 +26,7 @@ public class PlayerCharacter
     public string PlayerName => _name;
 
     public string JobName => _job.JobName;
-    public int Hp
-    {
-        get => _job.Hp;
 
-       
-        set => ActualHp = value;
-    }
     public int Dodge
     {
         get => _dodge;
@@ -45,14 +41,9 @@ public class PlayerCharacter
 
     public void Heal(int amount)
     {
-        if (ActualHp + amount > _job.Hp)
-        {
-            ActualHp = _job.Hp;
-        }
-        else
-        {
-            ActualHp += amount;
-        }
+        ActualHp += amount;
+        if (ActualHp > MaxHp)
+            ActualHp = MaxHp;
     }
 
 
@@ -83,7 +74,7 @@ public class PlayerCharacter
 
     public void SetHp()
     {
-        ActualHp = Hp;
+        ActualHp = MaxHp;
     }
     
     public int IncreaseDodge(int amount)
@@ -96,5 +87,12 @@ public class PlayerCharacter
         ActualHp -= amount;
         if (ActualHp < 0)
             ActualHp = 0;
+    }
+
+    public void RestoreHp(int amount)
+    {
+        ActualHp += amount;
+        if (ActualHp > MaxHp)
+            ActualHp = MaxHp;
     }
 }

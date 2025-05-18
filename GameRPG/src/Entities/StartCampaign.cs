@@ -65,9 +65,28 @@ public class StartCampaign
         if (_campaignControl.GetStoryProgress() == 1)
         {
             Console.WriteLine("You defeated the goblins and now you can continue your journey.");
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
             Console.Clear();
-            
+
+            Console.WriteLine("You find a small room with a campfire and a waterskin.");
+            Console.WriteLine("Do you want to rest here and recover some HP? (y/n)");
+            string input = Console.ReadLine();
+
+            if (input?.ToLower() == "y")
+            {
+                _playerCharacter.RestoreHp(20);
+                Console.WriteLine("You take a moment to rest and recover.");
+                Console.WriteLine($"Your HP is now: {_playerCharacter.ActualHp}");
+                Thread.Sleep(2000);
+            }
+            else
+            {
+                Console.WriteLine("You decide to keep moving cautiously.");
+                Thread.Sleep(2000);
+            }
+
+            Console.Clear();
+
         }
     }
 }
