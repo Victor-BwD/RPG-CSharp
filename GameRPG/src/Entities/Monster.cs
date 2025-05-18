@@ -34,6 +34,7 @@ public abstract class Monster
 
 public class Goblin : Monster
 {
+    private static readonly Random _rng = new();
     public int PowerAttack { get; protected set; }
     public int Damage { get; protected set; }
 
@@ -45,14 +46,15 @@ public class Goblin : Monster
     
     public override void Attack(PlayerCharacter player)
     {
-        var attackRoll = new Random().Next(1, 21);
+
+        var attackRoll = _rng.Next(1, 21);
         if (attackRoll <= player.Dodge)
         {
             Console.WriteLine("You dodge the attack.");
             return;
         }
 
-        Damage = new Random().Next(1, 2) + PowerAttack;
+        Damage = _rng.Next(1, 3) + PowerAttack;
         player.TakeDamage(Damage);
         Console.WriteLine("You failed to dodge the enemy's attack.");
         Console.WriteLine($"{player.PlayerName} lost {Damage} health points");
@@ -90,6 +92,7 @@ public class Minotaur : Monster
 
 public class Vampire : Monster
 {
+    private static readonly Random _rng = new();
     public int PowerAttack { get; protected set; }
     public int Damage { get; protected set; }
     
@@ -101,15 +104,15 @@ public class Vampire : Monster
     
     public override void Attack(PlayerCharacter player)
     {
-        var attackRoll = new Random().Next(1, 21); 
+        var attackRoll = _rng.Next(1, 21); 
         if (attackRoll <= player.Dodge)
         {
             Console.WriteLine("You dodge the attack.");
             return;
         }
 
-        Damage = new Random().Next(1, 2) + PowerAttack;
-        player.ActualHp -= Damage;
+        Damage = _rng.Next(1, 6) + PowerAttack;
+        player.TakeDamage(Damage);
         Console.WriteLine("You failed to dodge the enemy's attack.");
         Console.WriteLine($"{player.PlayerName} lost {Damage} health points");
     }
