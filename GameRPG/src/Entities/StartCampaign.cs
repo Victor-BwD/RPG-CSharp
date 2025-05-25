@@ -69,10 +69,23 @@ public class StartCampaign
             Console.Clear();
 
             Console.WriteLine("You find a small room with a campfire and a waterskin.");
-            Console.WriteLine("Do you want to rest here and recover some HP? (y/n)");
-            string input = Console.ReadLine();
+            string input;
+            do
+            {
+                Console.WriteLine("Do you want to rest here and recover some HP? (y/n)");
+                input = Console.ReadLine();
+                if (input == null)
+                {
+                    input = string.Empty;
+                }
+                input = input.Trim().ToLower();
+                if (input != "y" && input != "n")
+                {
+                    Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
+                }
+            } while (input != "y" && input != "n");
 
-            if (input?.ToLower() == "y")
+            if (input == "y")
             {
                 _playerCharacter.RestoreHp(20);
                 Console.WriteLine("You take a moment to rest and recover.");
@@ -86,7 +99,6 @@ public class StartCampaign
             }
 
             Console.Clear();
-
         }
     }
 }

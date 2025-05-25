@@ -1,5 +1,10 @@
 ﻿using GameRPG;
 
-CreationCharacter character = new CreationCharacter();
-
-character.CreateCharacter();
+class Program
+{
+    static void Main(string[] args)
+    {
+        CreationCharacter character = new CreationCharacter();
+        character.CreateCharacter();
+    }
+}
