@@ -64,41 +64,55 @@ public class StartCampaign
     {
         if (_campaignControl.GetStoryProgress() == 1)
         {
-            Console.WriteLine("You defeated the goblins and now you can continue your journey.");
-            Thread.Sleep(2000);
-            Console.Clear();
-
-            Console.WriteLine("You find a small room with a campfire and a waterskin.");
-            string input;
-            do
-            {
-                Console.WriteLine("Do you want to rest here and recover some HP? (y/n)");
-                input = Console.ReadLine();
-                if (input == null)
-                {
-                    input = string.Empty;
-                }
-                input = input.Trim().ToLower();
-                if (input != "y" && input != "n")
-                {
-                    Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
-                }
-            } while (input != "y" && input != "n");
-
-            if (input == "y")
-            {
-                _playerCharacter.RestoreHp(20);
-                Console.WriteLine("You take a moment to rest and recover.");
-                Console.WriteLine($"Your HP is now: {_playerCharacter.ActualHp}");
-                Thread.Sleep(2000);
-            }
-            else
-            {
-                Console.WriteLine("You decide to keep moving cautiously.");
-                Thread.Sleep(2000);
-            }
-
-            Console.Clear();
+            DisplayStoryProgress();
+            HandleRestArea();
         }
+    }
+
+    private void DisplayStoryProgress()
+    {
+        Console.WriteLine("You defeated the goblins and now you can continue your journey.");
+        Thread.Sleep(2000);
+        Console.Clear();
+
+        Console.WriteLine("You find a small room with a campfire and a waterskin.");
+    }
+
+    private void HandleRestArea()
+    {
+        bool willRest = GetYesNoInput("Do you want to rest here and recover some HP?");
+
+        if (willRest)
+        {
+            const int healAmount = 20;
+            _playerCharacter.RestoreHp(healAmount);
+            Console.WriteLine("You take a moment to rest and recover.");
+            Console.WriteLine($"Your HP is now: {_playerCharacter.ActualHp}");
+        }
+        else
+        {
+            Console.WriteLine("You decide to keep moving cautiously.");
+        }
+
+        Thread.Sleep(2000);
+        Console.Clear();
+    }
+
+    private bool GetYesNoInput(string question)
+    {
+        string input;
+        do
+        {
+            Console.WriteLine($"{question} (y/n)");
+            input = Console.ReadLine() ?? string.Empty;
+            input = input.Trim().ToLower();
+            
+            if (input != "y" && input != "n")
+            {
+                Console.WriteLine("Your character don't know what to do. Please enter 'y' or 'n'.");
+            }
+        } while (input != "y" && input != "n");
+
+        return input == "y";
     }
 }
