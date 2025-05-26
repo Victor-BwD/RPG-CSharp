@@ -66,6 +66,38 @@ public class Goblin : Monster
     }
 }
 
+public class GoblinBrute : Monster
+{
+    private static readonly Random _rng = new();
+    public int PowerAttack { get; protected set; }
+    public int Damage { get; protected set; }
+    
+    public GoblinBrute() : base("Goblin Brute", 1, 100, 3, 4, 100)
+    {
+        PowerAttack = 3;
+        Iniciative = 6;
+    }
+    
+    public override void Attack(PlayerCharacter player)
+    {
+        var attackRoll = _rng.Next(1, 21);
+        if (attackRoll <= player.Dodge)
+        {
+            Console.WriteLine("You dodge the attack.");
+            return;
+        }
+        Damage = _rng.Next(1, 4) + PowerAttack;
+        player.TakeDamage(Damage);
+        Console.WriteLine("You failed to dodge the enemy's attack.");
+        Console.WriteLine($"{player.PlayerName} lost {Damage} health points");
+    }
+    
+    public override void ReceiveDamage(int damage)
+    {
+        HealthPoints -= damage;
+    }
+}
+
 public class Minotaur : Monster
 {
     private static readonly Random _rng = new();
