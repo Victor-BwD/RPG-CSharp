@@ -55,15 +55,45 @@ public class PlayerCharacter
     public void IncreaseXP(int xp)
     {
         _xp += xp;
-        if (_level == 1 && _xp >= 200)
+        if (_level == 1 && _xp >= 100)
         {
-            Console.WriteLine("You leveled up!");
             SetLevel(2);
+            ApplyLevelUpBonus();
+            Console.WriteLine("You leveled up to level 2!");
+            Console.WriteLine($"New stats: Strength: {_stats.GetStrength()}, Dexterity: {_stats.GetDex()}, Intelligence: {_stats.GetIntelligence()}, Charisma: {_stats.GetCharisma()}");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
-
-        if (_level == 2 && _xp >= 500)
+        else if (_level == 2 && _xp >= 350)
         {
             SetLevel(3);
+            ApplyLevelUpBonus();
+            Console.WriteLine("You leveled up to level 3!");
+            Console.WriteLine($"New stats: Strength: {_stats.GetStrength()}, Dexterity: {_stats.GetDex()}, Intelligence: {_stats.GetIntelligence()}, Charisma: {_stats.GetCharisma()}");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+    }
+
+    private void ApplyLevelUpBonus()
+    {
+        switch (_job.JobName.ToLower())
+        {
+            case "warrior":
+                _stats.SetStrength(_stats.GetStrength() + 2);
+                MaxHp += 10;
+                Console.WriteLine("You gained +2 Strength and +10 Max HP!");
+                break;
+            case "mage":
+                _stats.SetIntelligence(_stats.GetIntelligence() + 2);
+                MaxHp += 6;
+                Console.WriteLine("You gained +2 Intelligence and +6 Max HP!");
+                break;
+            case "rogue":
+                _stats.SetDexterity(_stats.GetDex() + 2);
+                MaxHp += 8;
+                Console.WriteLine("You gained +2 Dexterity and +8 Max HP!");
+                break;
         }
     }
 
